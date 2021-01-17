@@ -1,0 +1,3652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window
+	x:Class="wire_transfer.Window1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Wire Transfer"
+	VerticalAlignment="Stretch" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:src="clr-namespace:wire_transfer"
+	mc:Ignorable="d"
+	Closing="Window_Closing"
+	Width="900"
+	Height="675"
+	Loaded="Window_Load">
+	<Window.Resources>
+		<src:FormValidation
+			x:Key="data" />
+		<Style
+			TargetType="{x:Type Button}"
+			x:Key="ImageButtonStyle">
+			<Setter
+				Property="Template">
+				<Setter.Value>
+					<ControlTemplate
+						TargetType="{x:Type Button}">
+						<ContentPresenter />
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style
+			TargetType="{x:Type TextBox}">
+			<Style.Triggers>
+				<Trigger
+					Property="IsEnabled"
+					Value="True">
+					<Setter
+						Property="Background"
+						Value="#FFFFFFFF" />
+				</Trigger>
+				<Trigger
+					Property="IsEnabled"
+					Value="False">
+					<Setter
+						Property="Background"
+						Value="#FFC4C4C4" />
+				</Trigger>
+				<Trigger
+					Property="Validation.HasError"
+					Value="true">
+					<Setter
+						Property="ToolTip"
+						Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
+					<Setter
+						Property="BorderBrush"
+						Value="Red" />
+				</Trigger>
+				<Trigger
+					Property="Validation.HasError"
+					Value="false">
+					<Setter
+						Property="BorderBrush"
+						Value="#FFABADB3" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style
+			TargetType="{x:Type ComboBox}">
+			<Style.Triggers>
+				<Trigger
+					Property="IsEnabled"
+					Value="True">
+					<Setter
+						Property="Background"
+						Value="#FFFFFFFF" />
+				</Trigger>
+				<Trigger
+					Property="IsEnabled"
+					Value="False">
+					<Setter
+						Property="Background"
+						Value="#FFC4C4C4" />
+				</Trigger>
+				<Trigger
+					Property="Validation.HasError"
+					Value="true">
+					<Setter
+						Property="ToolTip"
+						Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
+					<Setter
+						Property="BorderBrush"
+						Value="Red" />
+				</Trigger>
+				<Trigger
+					Property="Validation.HasError"
+					Value="false">
+					<Setter
+						Property="BorderBrush"
+						Value="#FFABADB3" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+	<Viewbox
+		Stretch="Uniform">
+		<Grid
+			Width="887"
+			Height="637">
+			<Button
+				Name="homeBtn"
+				Visibility="Hidden"
+				Cursor="Hand"
+				Style="{StaticResource ImageButtonStyle}"
+				Click="Return_Home"
+				Grid.Column="0"
+				Grid.Row="0"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				Margin="8,1,844,601"
+				Width="35"
+				Height="35">
+				<Image
+					Name="homeBtnIcon"
+					Stretch="UniformToFill"
+					Source="images\home_button.png"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					MouseEnter="Home_Button_onFocus"
+					MouseLeave="Home_Button_offFocus" />
+			</Button>
+			<Menu
+				Visibility="Collapsed"
+				FontSize="13"
+				Grid.Column="0"
+				Grid.Row="0"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Top"
+				Margin="0,0,0,0"
+				Height="20"
+				Grid.ColumnSpan="3">
+				<MenuItem
+					Header="_File">
+					<MenuItem
+						Header="_New"
+						InputGestureText="Ctrl+N" />
+					<MenuItem
+						Header="_Open"
+						InputGestureText="Ctrl+O" />
+					<MenuItem
+						Header="_Close"
+						InputGestureText="Ctrl+X" />
+					<MenuItem
+						Header="_Save"
+						InputGestureText="Ctrl+S" />
+				</MenuItem>
+				<MenuItem
+					Header="_About">
+					<MenuItem
+						Header="_Help"
+						InputGestureText="Ctrl+H" />
+				</MenuItem>
+			</Menu>
+			<Canvas
+				Name="welcomePage"
+				Visibility="Visible"
+				x:FieldModifier="public"
+				RenderTransformOrigin="0.5,0.5"
+				Grid.Column="0"
+				Grid.Row="0"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				Margin="-7,36,0,0">
+				<Image
+					Stretch="Uniform"
+					Source="images\logo.png"
+					Canvas.Top="-32"
+					Canvas.Left="156"
+					Height="300"
+					Width="600"></Image>
+				<Button
+					Content="New Wire Transfer"
+					Name="newWireButton"
+					Click="Enable_New_Wire"
+					Grid.Column="0"
+					Grid.Row="0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Cursor="Hand"
+					Width="200"
+					Height="35"
+					FontSize="15"
+					Canvas.Top="348.2000000000001"
+					Canvas.Left="348.00000000000006" />
+				<TextBlock
+					TextWrapping="WrapWithOverflow"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					TextAlignment="Center"
+					Text="Selfreliance FCU Wire Transfer Manager"
+					Height="35"
+					FontWeight="SemiBold"
+					FontSize="24"
+					Width="449"
+					Canvas.Top="215.2"
+					Canvas.Left="222.00000000000006" />
+				<TextBlock
+					Text="Please select what you'd like to do."
+					Height="26"
+					Foreground="#FF6D6D6D"
+					FontWeight="Medium"
+					FontSize="18"
+					Width="284"
+					FontFamily="Segoe UI"
+					Canvas.Top="258.2"
+					Canvas.Left="300.99999999999994" />
+				<Border
+					AllowDrop="False"
+					BorderThickness="2,2,2,2"
+					Width="659"
+					Canvas.Top="315"
+					Canvas.Left="119"
+					Canvas.Bottom="124"
+					Height="162"
+					Cursor="Arrow">
+					<Border.BorderBrush>
+						<LinearGradientBrush
+							StartPoint="0,0.5"
+							EndPoint="1,0.5">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop
+									Color="#FFFFFFFF"
+									Offset="0.01483050847457627" />
+								<GradientStop
+									Color="#FFFFFFFF"
+									Offset="1" />
+								<GradientStop
+									Color="#FF777777"
+									Offset="0.49788135593220345" />
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</Border.BorderBrush>
+				</Border>
+				<Button
+					Click="Enable_Wire_Lookup"
+					Grid.Column="0"
+					Grid.Row="0"
+					Name="wireLookupButton"
+					Content="Look Up a Wire Transfer"
+					Cursor="Hand"
+					Height="35"
+					Width="200"
+					FontSize="15"
+					Canvas.Top="400.2"
+					Canvas.Left="348.00000000000006" />
+			</Canvas>
+			<Canvas
+				Visibility="Collapsed"
+				Name="wireLookupPage"
+				Grid.Column="0"
+				Grid.Row="0"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Stretch"
+				Margin="0,1,0,0"
+				Width="887">
+				<TextBlock
+					Text="*NOTE: wires highlighted in red have been marked as incorrect."
+					Height="24"
+					FontWeight="Medium"
+					Foreground="#FFBA0101"
+					FontSize="13"
+					Width="379"
+					Canvas.Left="89.000000000000057"
+					Canvas.Top="172.99999999999997" />
+				<Border
+					AllowDrop="False"
+					BorderThickness="2,2,2,2"
+					Canvas.Top="40"
+					Width="824"
+					Canvas.Left="18"
+					Canvas.Bottom="399"
+					Height="196.99999999999997">
+					<Border.BorderBrush>
+						<LinearGradientBrush
+							StartPoint="0,0.5"
+							EndPoint="1,0.5">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop
+									Color="#FFFFFFFF"
+									Offset="0.01483050847457627" />
+								<GradientStop
+									Color="#FFFFFFFF"
+									Offset="1" />
+								<GradientStop
+									Color="#FF777777"
+									Offset="0.49788135593220345" />
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</Border.BorderBrush>
+				</Border>
+				<TextBlock
+					Text="Search for a wire transfer by..."
+					Height="24"
+					FontWeight="Medium"
+					FontSize="16"
+					Width="228"
+					Canvas.Left="89"
+					Canvas.Top="13.1"
+					Foreground="#FF494949" />
+				<RadioButton
+					GroupName="searchOpts"
+					Name="searchWireIDOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					RenderTransformOrigin="-0.0625,-0.3125"
+					Canvas.Left="89.000000000000057"
+					Canvas.Top="58"
+					Checked="Enable_WireID_Search_Option" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Text="Wire ID:"
+					Width="89"
+					Canvas.Left="113"
+					Canvas.Top="57"
+					MouseLeftButtonDown="Enable_WireID_Search_Option" />
+				<TextBox
+					IsEnabled="False"
+					Name="searchWireIDBox"
+					Height="20"
+					RenderTransformOrigin="-0.0569,0.1721"
+					Width="69"
+					Canvas.Left="240"
+					Canvas.Top="57"
+					KeyDown="Enter_Key_OnSearch" />
+				<RadioButton
+					GroupName="searchOpts"
+					Name="searchSNameOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					RenderTransformOrigin="-0.0625,-0.3125"
+					Canvas.Left="89"
+					Canvas.Top="85"
+					Checked="Enable_SName_Search_Option" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Text="Sender name:"
+					Width="89"
+					Canvas.Left="113.00000000000006"
+					Canvas.Top="82.960000000000036"
+					MouseLeftButtonDown="Enable_SName_Search_Option" />
+				<TextBox
+					IsEnabled="False"
+					Name="searchSenderNameBox"
+					Height="20"
+					Width="189"
+					Canvas.Left="239.99999999999994"
+					Canvas.Top="83.000000000000028"
+					KeyDown="Enter_Key_OnSearch" />
+				<RadioButton
+					GroupName="searchOpts"
+					Name="searchRNameOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					RenderTransformOrigin="-0.0625,-0.3125"
+					Canvas.Left="89.000000000000057"
+					Canvas.Top="112"
+					Checked="Enable_RName_Search_Option" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Text="Recipient name:"
+					Width="104"
+					Canvas.Left="113.00000000000006"
+					Canvas.Top="110.96000000000007"
+					MouseLeftButtonDown="Enable_RName_Search_Option" />
+				<TextBox
+					IsEnabled="False"
+					Name="searchRecipientNameBox"
+					Height="20"
+					Width="189"
+					Canvas.Left="239.99999999999994"
+					Canvas.Top="110.99999999999997"
+					KeyDown="Enter_Key_OnSearch" />
+				<RadioButton
+					GroupName="searchOpts"
+					Name="searchDateOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					RenderTransformOrigin="-0.0625,-0.3125"
+					Canvas.Left="89.000000000000057"
+					Canvas.Top="139.99999999999997"
+					Checked="Enable_Date_Search_Option" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Text="Date:"
+					Width="104"
+					Canvas.Left="113.00000000000006"
+					Canvas.Top="137"
+					MouseLeftButtonDown="Enable_Date_Search_Option" />
+				<TextBox
+					IsEnabled="False"
+					Name="searchDateBox"
+					Height="20"
+					Width="189"
+					Canvas.Left="239.99999999999994"
+					Canvas.Top="138.99999999999997"
+					KeyDown="Enter_Key_OnSearch" />
+				<TextBlock
+					Foreground="#FF494949"
+					FontWeight="Medium"
+					FontStyle="Normal"
+					Text="Filter By Wire Type "
+					FontSize="15"
+					Height="20"
+					Canvas.Left="491"
+					Canvas.Top="54"
+					Width="144" />
+				<RadioButton
+					GroupName="remitNonremitSearchOpts"
+					Name="searchRemittanceOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					Canvas.Left="492"
+					Canvas.Top="84.000000000000028" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Canvas.Left="516"
+					Text="Remittance (R)"
+					Canvas.Top="83"
+					Width="90"
+					MouseLeftButtonDown="Enable_Remittance_Search_Option" />
+				<RadioButton
+					GroupName="remitNonremitSearchOpts"
+					Name="searchNonremittanceOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					Canvas.Top="112.00000000000003"
+					Canvas.Left="492" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Text="Both"
+					Width="47"
+					Canvas.Top="138.96"
+					Canvas.Left="516"
+					MouseLeftButtonDown="Enable_Both_Search_Option" />
+				<RadioButton
+					GroupName="remitNonremitSearchOpts"
+					Name="searchBothOpt"
+					FontSize="14"
+					Height="16"
+					Width="16"
+					IsChecked="True"
+					Canvas.Left="492"
+					Canvas.Top="142" />
+				<TextBlock
+					FontSize="13"
+					Height="17"
+					Canvas.Left="516"
+					Text="Nonremittance (NR)"
+					Canvas.Top="111"
+					Width="119"
+					MouseLeftButtonDown="Enable_Nonremittance_Search_Option" />
+				<Button
+					Name="clearSearchBtn"
+					Grid.Column="0"
+					Grid.Row="0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Height="23"
+					FontSize="13"
+					Click="Clear_Search"
+					Content="Clear Search"
+					Width="91"
+					RenderTransformOrigin="0.511,0.5"
+					Cursor="Hand"
+					Canvas.Left="89"
+					Canvas.Top="203.00000000000003" />
+				<Button
+					Name="lookupButton"
+					Grid.Column="0"
+					Grid.Row="0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Height="23"
+					FontSize="13"
+					Click="Display_Search_Results"
+					Content="Search"
+					Width="91"
+					RenderTransformOrigin="0.511,0.5"
+					Cursor="Hand"
+					Canvas.Left="337.99999999999994"
+					Canvas.Top="203.00000000000003" />
+				<TextBlock
+					Name="noSearchResultsLabel"
+					Visibility="Hidden"
+					Text="No results. Please modify your search."
+					Height="24"
+					FontWeight="Medium"
+					FontSize="13"
+					Width="378"
+					Foreground="#FFBA0101"
+					Canvas.Left="436.99999999999994"
+					Canvas.Top="205" />
+				<DataGrid
+					Visibility="Visible"
+					Name="wireGrid"
+					AutoGenerateColumns="False"
+					SelectionMode="Single"
+					IsReadOnly="True"
+					Cursor="Arrow"
+					Height="329"
+					Canvas.Top="248"
+					Canvas.Left="44"
+					Width="798">
+					<DataGrid.Resources>
+						<SolidColorBrush
+							x:Key="{x:Static SystemColors.HighlightBrushKey}"
+							Color="#8a8a8a"
+							Opacity="0.4" />
+						<SolidColorBrush
+							x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+							Color="Black" />
+					</DataGrid.Resources>
+					<DataGrid.RowStyle>
+						<Style
+							TargetType="DataGridRow">
+							<EventSetter
+								Event="MouseDoubleClick"
+								Handler="Print_Search_Selected_Wire"></EventSetter>
+							<Setter
+								Property="Cursor"
+								Value="Hand"></Setter>
+							<Setter
+								Property="Background"
+								Value="#e7ffa6"></Setter>
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding status}"
+									Value="1">
+									<Setter
+										Property="Background"
+										Value="#ff9991"></Setter>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</DataGrid.RowStyle>
+					<DataGrid.Columns>
+						<DataGridTextColumn
+							Binding="{Binding wire_id}"
+							Width="60"
+							Header="Wire ID" />
+						<DataGridTextColumn
+							Binding="{Binding datetime}"
+							Width="130"
+							Header="Date and Time" />
+						<DataGridTextColumn
+							Binding="{Binding s_name}"
+							Width="130"
+							Header="Sender Name" />
+						<DataGridTextColumn
+							Binding="{Binding r_name}"
+							Width="130"
+							Header="Recipient Name" />
+						<DataGridTextColumn
+							Binding="{Binding rb_name}"
+							Width="160"
+							Header="Bank Name" />
+						<DataGridTextColumn
+							Binding="{Binding transfer_amount_USD}"
+							Width="100"
+							Header="Amount (USD)" />
+						<DataGridTextColumn
+							Binding="{Binding wire_type}"
+							Width="60"
+							Header="Wire Type" />
+					</DataGrid.Columns>
+				</DataGrid>
+				<Border
+					AllowDrop="False"
+					BorderThickness="2,2,2,2"
+					Height="40"
+					Canvas.Bottom="16"
+					Canvas.Left="0"
+					Width="887"
+					Canvas.Top="585">
+					<Border.BorderBrush>
+						<LinearGradientBrush
+							StartPoint="0,0.5"
+							EndPoint="1,0.5">
+							<LinearGradientBrush.GradientStops>
+								<GradientStop
+									Color="#FFFFFFFF"
+									Offset="0.01483050847457627" />
+								<GradientStop
+									Color="#FFFFFFFF"
+									Offset="1" />
+								<GradientStop
+									Color="#FF777777"
+									Offset="0.49788135593220345" />
+							</LinearGradientBrush.GradientStops>
+						</LinearGradientBrush>
+					</Border.BorderBrush>
+				</Border>
+				<Button
+					Click="Disable_Wire_Lookup"
+					Width="75"
+					Canvas.Top="595"
+					Cursor="Hand"
+					FontSize="13"
+					Height="20"
+					Canvas.Left="44.000000000000057">
+				Back
+			</Button>
+				<Button
+					Name="searchPrintWireBtn"
+					Width="91"
+					FontSize="13"
+					Click="Print_Search_Selected_Wire"
+					Command="{Binding Remove}"
+					Cursor="Hand"
+					Content="Print Wire"
+					Height="20"
+					Canvas.Top="595"
+					Canvas.Left="644">
+					<Button.Style>
+						<Style
+							TargetType="Button">
+							<Setter
+								Property="IsEnabled"
+								Value="False" />
+							<Setter
+								Property="Opacity"
+								Value="0.7" />
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedItems.Count, ElementName=wireGrid}"
+									Value="1">
+									<Setter
+										Property="IsEnabled"
+										Value="True" />
+									<Setter
+										Property="Opacity"
+										Value="1" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button
+					Name="wireSelectButton"
+					Width="91"
+					FontSize="13"
+					Click="Populate_Wire"
+					Command="{Binding Remove}"
+					Cursor="Hand"
+					Height="20"
+					VerticalAlignment="Stretch"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Stretch"
+					Canvas.Top="595"
+					Canvas.Left="751">
+					<Button.Style>
+						<Style
+							TargetType="Button">
+							<Setter
+								Property="IsEnabled"
+								Value="False" />
+							<Setter
+								Property="Opacity"
+								Value="0.7" />
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedItems.Count, ElementName=wireGrid}"
+									Value="1">
+									<Setter
+										Property="IsEnabled"
+										Value="True" />
+									<Setter
+										Property="Opacity"
+										Value="1" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+			    Select Wire
+           </Button>
+				<!--<Button
+					Click="List_Field_Names_PDF_test"
+					Width="75"
+					Canvas.Top="595"
+					Cursor="Hand"
+					FontSize="13"
+					Height="20"
+					Canvas.Left="300"
+					Content="Test PDF "></Button>-->
+			</Canvas>
+			<TabControl
+				Visibility="Collapsed"
+				x:FieldModifier="public"
+				Name="newWireForm"
+				TabStripPlacement="Bottom"
+				VerticalContentAlignment="Top"
+				HorizontalContentAlignment="Left"
+				Grid.Column="0"
+				Grid.Row="0"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				Margin="0,36,0,0"
+				Width="887"
+				Height="601">
+				<TabItem
+					HorizontalAlignment="Left"
+					HorizontalContentAlignment="Left"
+					FontStyle="Normal"
+					FontStretch="Normal"
+					VerticalAlignment="Stretch"
+					FontSize="13"
+					Width="160"
+					Header="Sender and Currency Info"
+					Height="27">
+					<Canvas
+						Name="Sender_And_Recipient_Info_Page"
+						Width="887"
+						Height="574">
+						<Border
+							AllowDrop="False"
+							BorderThickness="2,2,2,2"
+							Height="40"
+							Canvas.Top="520"
+							Canvas.Bottom="14"
+							Canvas.Left="0"
+							Width="881">
+							<Border.BorderBrush>
+								<LinearGradientBrush
+									StartPoint="0,0.5"
+									EndPoint="1,0.5">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop
+											Color="#FFFFFFFF"
+											Offset="0.01483050847457627" />
+										<GradientStop
+											Color="#FFFFFFFF"
+											Offset="1" />
+										<GradientStop
+											Color="#FF777777"
+											Offset="0.49788135593220345" />
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Border.BorderBrush>
+						</Border>
+						<Button
+							FontSize="12"
+							Click="Disable_New_Wire"
+							Height="20"
+							Width="75"
+							Canvas.Left="7"
+							Cursor="Hand"
+							Canvas.Top="530"
+							x:Name="backBtn">
+							Back
+						</Button>
+						<Button
+							Click="NextPage_Button"
+							FontSize="12"
+							Height="20"
+							Width="70"
+							Cursor="Hand"
+							Canvas.Left="802"
+							Canvas.Top="530">
+							Next Page
+						</Button>
+						<GroupBox
+							FontSize="13"
+							FontWeight="Normal"
+							VerticalAlignment="Top"
+							Height="501"
+							Width="426">
+							<GroupBox.Header>
+								<TextBlock
+									FontWeight="Bold"
+									Foreground="#FF6D6D6D"
+									TextAlignment="Center"
+									Width="195">
+						SENDER/PAYER INFORMATION
+					</TextBlock>
+							</GroupBox.Header>
+							<Canvas
+								Name="Sender_Info_Page"
+								VerticalAlignment="Top"
+								Height="477"
+								Width="414.8">
+								<TextBlock
+									FontSize="13"
+									TextWrapping="WrapWithOverflow"
+									Height="35"
+									LineStackingStrategy="BlockLineHeight"
+									LineHeight="13"
+									TextAlignment="Right"
+									Width="125"
+									Text="Member Number/ Sub Account: "
+									Canvas.Top="41"
+									Canvas.Left="11"></TextBlock>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Height="27"
+									Width="24"
+									Canvas.Left="236"
+									Canvas.Top="41">
+									—
+								</Label>
+								<Border
+									AllowDrop="False"
+									BorderThickness="2,2,2,2"
+									Canvas.Top="11"
+									Width="420"
+									Canvas.Left="1"
+									Height="85"
+									Canvas.Bottom="381">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+								<TextBox
+									x:Name="sMemberNum"
+									Height="27"
+									KeyDown="Sender_Member_Num_On_Enter"
+									LostFocus="Sender_Member_Num_On_LostFocus"
+									Text="{Binding Path=sMemberNum, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="139"
+									Width="98"
+									Canvas.Top="41"
+									TabIndex="0"></TextBox>
+								<TextBox
+									x:Name="sSubAccount"
+									Height="27"
+									Text="{Binding Path=sSubAccount, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									Width="68"
+									Canvas.Left="260.00000000000011"
+									Canvas.Top="41"
+									TabIndex="1"></TextBox>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="55.000000000000114"
+									Canvas.Top="121.00000000000003">
+						Name:
+					</Label>
+								<TextBox
+									Name="sName"
+									Width="190"
+									Height="27"
+									Text="{Binding Path=sName, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="138.00000000000011"
+									Canvas.Top="121.00000000000003"
+									TabIndex="2" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="55.000000000000114"
+									Canvas.Top="164.00000000000003">
+						Address:
+					</Label>
+								<TextBox
+									Name="sAddress"
+									Width="190"
+									Height="27"
+									Text="{Binding Path=sAddress, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="138.00000000000011"
+									TabIndex="3"
+									Canvas.Top="166" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="91"
+									Height="27"
+									Canvas.Top="211.99999999999997"
+									Canvas.Left="47.000000000000114">
+						City:
+					</Label>
+								<TextBox
+									Name="sCity"
+									Width="190"
+									Height="27"
+									Text="{Binding Path=sCity, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="138.00000000000011"
+									Canvas.Top="211.8"
+									TabIndex="4" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="110"
+									Height="27"
+									Canvas.Left="28.000000000000114"
+									Canvas.Top="255">
+						State:
+					</Label>
+								<ComboBox
+									Name="sStatesDropdown"
+									ItemsSource="{Binding states}"
+									Width="53"
+									Height="27"
+									BorderBrush="Red"
+									Text="{Binding Path=sState, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="138.00000000000011"
+									Canvas.Top="255"
+									TabIndex="5"></ComboBox>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="38"
+									Height="27"
+									Canvas.Left="206.00000000000011"
+									Canvas.Top="255">
+						Zip:
+					</Label>
+								<TextBox
+									Name="sZip"
+									Height="27"
+									Text="{Binding Path=sZip, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Width="84"
+									Canvas.Left="244.00000000000011"
+									Canvas.Top="255"
+									TabIndex="6" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="122"
+									Height="27"
+									Canvas.Left="16.000000000000114"
+									Canvas.Top="298">
+						Daytime Phone No:
+					</Label>
+								<TextBox
+									Name="sPhone"
+									Width="190"
+									Height="27"
+									Text="{Binding sPhone, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="138.00000000000011"
+									Canvas.Top="298"
+									TabIndex="7" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="141"
+									Height="27"
+									Canvas.Left="-2.9999999999998863"
+									Canvas.Top="373.7">
+							Payment Instructions:
+						</Label>
+								<TextBox
+									TextWrapping="Wrap"
+									Name="sPaymentInstr"
+									Width="190"
+									Height="89"
+									Text="{Binding Path=sPaymentInstr, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									Canvas.Left="138.00000000000011"
+									Canvas.Top="339"
+									TabIndex="8" />
+							</Canvas>
+						</GroupBox>
+						<GroupBox
+							FontSize="13"
+							FontWeight="Normal"
+							Width="431"
+							VerticalAlignment="Top"
+							Canvas.Left="450"
+							Height="501">
+							<GroupBox.Header>
+								<TextBlock
+									FontWeight="Bold"
+									Foreground="#FF6D6D6D"
+									TextAlignment="Center">
+									CURRENCY INFORMATION
+								</TextBlock>
+							</GroupBox.Header>
+							<Canvas
+								Name="Currency_Exchange_Page"
+								Grid.ColumnSpan="2"
+								Width="417"
+								Height="474">
+								<Border
+									BorderThickness="2,2,2,2"
+									Width="401"
+									Canvas.Left="8"
+									Canvas.Top="0"
+									Height="105">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+								<Border
+									BorderThickness="2,2,2,2"
+									Width="401"
+									Canvas.Left="0"
+									Canvas.Top="278"
+									Height="96">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+								<ComboBox
+									Name="currencyInfoDropdown"
+									Height="25"
+									TabIndex="9"
+									Canvas.Top="36"
+									Canvas.Left="59"
+									Width="299">
+									<ComboBoxItem
+										IsSelected="True">US Dollars to US Dollars</ComboBoxItem>
+									<ComboBoxItem>Fixed US Dollars to Foreign Currency</ComboBoxItem>
+									<ComboBoxItem>US Dollars to Fixed Foreign Currency</ComboBoxItem>
+								</ComboBox>
+								<TextBlock
+									Grid.Column="0"
+									Grid.Row="0"
+									VerticalAlignment="Top"
+									HorizontalAlignment="Left"
+									RenderTransformOrigin="0.5516,0.4524"
+									TextAlignment="Center"
+									Height="25"
+									FontWeight="Medium"
+									Foreground="#FF494949"
+									Text="Enter the transfer amount in USD"
+									Width="229"
+									FontStyle="Italic"
+									FontSize="14.5"
+									Canvas.Left="6.0000000000001137"
+									Canvas.Top="120.00000000000003" />
+								<TextBlock
+									Text="Transfer Amount:"
+									TextAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Stretch"
+									FontSize="13"
+									Height="18"
+									Canvas.Left="46.000000000000114"
+									Canvas.Top="163.00000000000003" />
+								<TextBox
+									VerticalAlignment="Top"
+									HorizontalAlignment="Stretch"
+									Name="transAmount"
+									GotFocus="INT_Boxes_On_Focus"
+									LostFocus="TransAmount_OnLostFocus"
+									KeyDown="TransAmount_Enter"
+									Text="{Binding Path=transAmount, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Width="165"
+									Height="25"
+									TabIndex="9"
+									Canvas.Left="149.00000000000011"
+									Canvas.Top="161.00000000000003" />
+								<TextBlock
+									TextAlignment="Right"
+									Text="Transfer Fees:"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Stretch"
+									FontSize="13"
+									Height="18"
+									Canvas.Left="66.999999999999886"
+									Canvas.Top="197.00000000000003" />
+								<TextBox
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Top"
+									Name="USDTotal"
+									GotFocus="INT_Boxes_On_Focus"
+									LostFocus="INT_Boxes_Off_Focus"
+									Text="{Binding Path=USDTotal, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Width="165"
+									Height="25"
+									TabIndex="11"
+									Canvas.Left="149.00000000000011"
+									Canvas.Top="234.00000000000003" />
+								<TextBlock
+									TextAlignment="Right"
+									Text="Total:"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Top"
+									FontSize="13"
+									Width="35"
+									Height="17"
+									Canvas.Left="109.00000000000011"
+									Canvas.Top="236.00000000000003" />
+								<TextBox
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Stretch"
+									Name="transFees"
+									GotFocus="INT_Boxes_On_Focus"
+									LostFocus="TransAmount_OnLostFocus"
+									KeyDown="TransAmount_Enter"
+									Text="{Binding Path=transFees, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Width="165"
+									Height="25"
+									TabIndex="10"
+									Canvas.Left="149.00000000000011"
+									Canvas.Top="197.00000000000003" />
+								<TextBlock
+									Grid.Column="0"
+									Grid.Row="0"
+									VerticalAlignment="Top"
+									HorizontalAlignment="Left"
+									RenderTransformOrigin="0.5516,0.4524"
+									TextAlignment="Center"
+									Height="25"
+									FontWeight="Medium"
+									Foreground="#FF494949"
+									Text="Choose the Exchange Rate"
+									FontSize="14.5"
+									Width="178"
+									FontStyle="Italic"
+									Canvas.Left="6.0000000000001137"
+									Canvas.Top="295" />
+								<TextBlock
+									Grid.Column="0"
+									Grid.Row="0"
+									VerticalAlignment="Bottom"
+									HorizontalAlignment="Left"
+									Text="USD $1.00 = "
+									FontSize="13"
+									Width="75"
+									Height="17"
+									Canvas.Left="68.999999999999886"
+									Canvas.Top="328.9" />
+								<ComboBox
+									Name="CurrencyDropdown"
+									Grid.Column="0"
+									Grid.Row="0"
+									VerticalAlignment="Top"
+									HorizontalAlignment="Left"
+									ItemsSource="{Binding currencies}"
+									DropDownClosed="CurrencyDropdown_DropDownClosed"
+									Text="USD"
+									Width="62"
+									Height="25"
+									IsTabStop="True"
+									Canvas.Left="252.00000000000011"
+									Canvas.Top="327.9" />
+								<TextBox
+									Grid.Column="0"
+									Grid.Row="0"
+									VerticalAlignment="Bottom"
+									HorizontalAlignment="Right"
+									Name="exchangeRate"
+									LostFocus="ExchangeRate_OnLostFocus"
+									KeyDown="ExchangeRate_Enter"
+									Text="{Binding Path=exchangeRate, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Canvas.Left="149"
+									Width="86"
+									Height="25"
+									TabIndex="12"
+									Canvas.Right="182.00000000000011"
+									Canvas.Top="327.9" />
+								<TextBlock
+									Grid.Column="0"
+									Grid.Row="0"
+									VerticalAlignment="Top"
+									HorizontalAlignment="Left"
+									RenderTransformOrigin="0.5516,0.4524"
+									TextAlignment="Center"
+									Height="25"
+									FontWeight="Medium"
+									Foreground="#FF494949"
+									Text="USD to USD/Foreign Total Amount"
+									FontStyle="Italic"
+									FontSize="14.5"
+									Width="241"
+									Canvas.Left="0"
+									Canvas.Top="386" />
+								<TextBlock
+									Text="Transfer Amount:"
+									TextAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									FontSize="13"
+									Visibility="Collapsed"
+									Height="0"
+									Canvas.Left="46.000000000000114"
+									Canvas.Top="383.9" />
+								<TextBox
+									Grid.Column="0"
+									Grid.Row="0"
+									Name="foreignTransAmount"
+									GotFocus="INT_Boxes_On_Focus"
+									LostFocus="INT_Boxes_Off_Focus"
+									Text="{Binding Path=foreignTransAmount, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Visibility="Collapsed"
+									Width="0"
+									Height="0"
+									Canvas.Left="149.00000000000023"
+									Canvas.Top="377.90000000000009" />
+								<TextBlock
+									TextAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									Text="Total to Recipient:"
+									FontSize="13"
+									Height="18"
+									Width="110"
+									Canvas.Top="428"
+									Canvas.Left="31.000000000000114" />
+								<TextBox
+									Grid.Column="0"
+									Grid.Row="0"
+									Name="foreignTotal"
+									GotFocus="INT_Boxes_On_Focus"
+									LostFocus="ForeignAmount_OnLostFocus"
+									KeyDown="ForeignAmount_Enter"
+									Text="{Binding Path=foreignTotal, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									Width="165"
+									Height="25"
+									TabIndex="14"
+									Canvas.Top="425"
+									Canvas.Left="149.00000000000011" />
+								<TextBlock
+									Name="currencyTypeLabel"
+									Grid.Column="0"
+									Grid.Row="0"
+									Text="USD"
+									FontSize="13"
+									Width="36"
+									Foreground="#FFFFFFFF"
+									Background="#FF6B6B6B"
+									VerticalAlignment="Center"
+									FontWeight="SemiBold"
+									TextAlignment="Center"
+									Height="25"
+									Canvas.Top="425"
+									Canvas.Left="322.00000000000011" />
+							</Canvas>
+						</GroupBox>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							RenderTransformOrigin="0.5073,2.1426"
+							Canvas.Left="339.99999999999989"
+							Canvas.Top="59">
+							*
+						</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							Canvas.Left="339.99999999999989"
+							Canvas.Top="228.59999999999997">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							Canvas.Left="339.99999999999989"
+							RenderTransformOrigin="0.5,0.6368"
+							Canvas.Top="138.99999999999997">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							RenderTransformOrigin="0.5,0.5344"
+							Canvas.Left="339.99999999999989"
+							Canvas.Top="182.99999999999997">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							Canvas.Left="197.99999999999989"
+							Canvas.Top="272.8">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							RenderTransformOrigin="0.4833,0.5049"
+							Canvas.Left="339.99999999999989"
+							Canvas.Top="273">
+							*
+						</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							RenderTransformOrigin="0.549,0.4723"
+							Canvas.Left="775"
+							Canvas.Top="177.99999999999997">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							Canvas.Left="775"
+							Canvas.Top="215.00000000000003">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							Canvas.Left="775"
+							Canvas.Top="251.59999999999997">
+							*
+							</Label>
+					</Canvas>
+				</TabItem>
+				<TabItem
+					HorizontalAlignment="Left"
+					HorizontalContentAlignment="Left"
+					FontStyle="Normal"
+					FontStretch="Normal"
+					VerticalAlignment="Stretch"
+					FontSize="13"
+					Header="Recipient and Wire Availability Info"
+					Width="215">
+					<Canvas>
+						<Border
+							AllowDrop="False"
+							BorderThickness="2,2,2,2"
+							Height="40"
+							Canvas.Top="520"
+							Canvas.Bottom="14"
+							Canvas.Left="0"
+							Width="881">
+							<Border.BorderBrush>
+								<LinearGradientBrush
+									StartPoint="0,0.5"
+									EndPoint="1,0.5">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop
+											Color="#FFFFFFFF"
+											Offset="0.01483050847457627" />
+										<GradientStop
+											Color="#FFFFFFFF"
+											Offset="1" />
+										<GradientStop
+											Color="#FF777777"
+											Offset="0.49788135593220345" />
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Border.BorderBrush>
+						</Border>
+						<Button
+							FontSize="12"
+							Width="80"
+							Click="PreviousPage_Button"
+							Height="20"
+							Canvas.Left="8"
+							Canvas.Top="530"
+							Cursor="Hand">
+							Previous Page
+						</Button>
+						<Button
+							Click="NextPage_Button"
+							FontSize="12"
+							Height="20"
+							Width="70"
+							Cursor="Hand"
+							Canvas.Left="802"
+							Canvas.Top="530">
+							Next Page
+						</Button>
+						<GroupBox
+							FontSize="13"
+							FontWeight="Normal"
+							VerticalAlignment="Top"
+							Canvas.Left="0"
+							Height="500"
+							Width="426">
+							<Canvas
+								Name="Recipient_Info_Page"
+								VerticalAlignment="Top"
+								Height="474"
+								Width="410">
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="102"
+									Height="27"
+									Canvas.Left="29.000000000000114"
+									Canvas.Top="92.999999999999943">
+						Name:
+					</Label>
+								<TextBox
+									Name="rName"
+									Width="189"
+									Height="27"
+									Canvas.Left="130.00000000000011"
+									Canvas.Top="92.999999999999943"
+									Text="{Binding Path=rName, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="16" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="47.000000000000114"
+									Canvas.Top="129.00000000000006">
+						Address:
+					</Label>
+								<TextBox
+									Name="rAddress"
+									Width="189"
+									Height="27"
+									Canvas.Left="130.00000000000011"
+									Canvas.Top="129.00000000000006"
+									Text="{Binding Path=rAddress, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="17" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="91"
+									Height="27"
+									Canvas.Left="39"
+									Canvas.Top="164">
+						City:
+					</Label>
+								<TextBox
+									Name="rCity"
+									Width="189"
+									Height="27"
+									Canvas.Left="130.00000000000011"
+									Canvas.Top="164"
+									Text="{Binding Path=rCity, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="18" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="47.000000000000114"
+									Canvas.Top="199">
+						State:
+					</Label>
+								<ComboBox
+									ItemsSource="{Binding states}"
+									Name="rStatesDropdown"
+									Width="56"
+									Height="27"
+									Canvas.Left="130.00000000000011"
+									Canvas.Top="199"
+									TabIndex="19" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="35"
+									Height="27"
+									Canvas.Left="186"
+									Canvas.Top="199">
+						Zip:
+					</Label>
+								<TextBox
+									Name="rZip"
+									Width="98"
+									Height="27"
+									Canvas.Left="221.00000000000011"
+									Canvas.Top="199"
+									Text="{Binding Path=rZip, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="20" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="110"
+									Height="27"
+									Canvas.Left="20"
+									Canvas.Top="233">
+								Country:
+							</Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="91"
+									Height="27"
+									Canvas.Left="39"
+									Canvas.Top="268">
+									Phone:
+								</Label>
+								<TextBox
+									Name="rPhone"
+									Width="189"
+									Height="27"
+									Canvas.Left="130"
+									Canvas.Top="268"
+									Text="{Binding Path=rPhone, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="22" />
+								<TextBlock
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Text="Account Number or IBAN:"
+									TextWrapping="Wrap"
+									TextAlignment="Right"
+									FontSize="13"
+									Height="42"
+									Canvas.Left="3"
+									Canvas.Top="25"
+									Width="122"
+									Canvas.Right="271"></TextBlock>
+								<TextBox
+									VerticalAlignment="Center"
+									Name="rAccountNumIBAN"
+									Width="189"
+									Height="27"
+									KeyDown="Recipient_Account_Num_On_Enter"
+									LostFocus="Recipient_Account_Num_On_LostFocus"
+									Canvas.Left="130.00000000000011"
+									Canvas.Top="31"
+									Text="{Binding Path=rAccountNumIBAN, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="15" />
+								<Label
+									VerticalAlignment="Bottom"
+									Content="Special Identifier of Recipient"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Foreground="#FF494949"
+									FontWeight="Medium"
+									FontStyle="Italic"
+									Height="29"
+									FontSize="14.5"
+									Width="206"
+									Canvas.Top="317"
+									Canvas.Left="6.0000000000000568"></Label>
+								<TextBox
+									Name="rSSN"
+									Width="189"
+									Height="27"
+									Canvas.Top="355.00000000000011"
+									Canvas.Left="127.00000000000011"
+									Text="{Binding Path=rSSN, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="23" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="SSN:"
+									FontSize="13"
+									Width="77"
+									Height="27"
+									Canvas.Top="354"
+									Canvas.Left="51"></Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="TIN:"
+									FontSize="13"
+									Width="122"
+									Height="27"
+									Canvas.Top="389"
+									Canvas.Left="6"></Label>
+								<TextBox
+									Name="rTIN"
+									Width="189"
+									Height="27"
+									Canvas.Top="390"
+									Canvas.Left="127.00000000000011"
+									Text="{Binding Path=rTIN, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="24" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="DL#:"
+									FontSize="13"
+									Width="122"
+									Height="27"
+									Canvas.Top="425"
+									Canvas.Left="6"></Label>
+								<TextBox
+									Name="rDLnum"
+									VerticalAlignment="Center"
+									Height="27"
+									Width="189"
+									Canvas.Top="428"
+									Canvas.Left="127.00000000000011"
+									Text="{Binding Path=rDLnum, Source={StaticResource data}, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="25" />
+								<ComboBox
+									Name="CountriesDropdown"
+									Text="{Binding Path=rCountry, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+									ItemsSource="{Binding countries}"
+									Width="189"
+									Height="27"
+									Canvas.Left="130.00000000000011"
+									Canvas.Top="233"
+									TabIndex="21" />
+								<Border
+									AllowDrop="False"
+									BorderThickness="2,2,2,2"
+									Canvas.Top="10"
+									Canvas.Left="-2"
+									Width="399"
+									Canvas.Bottom="401"
+									Height="65">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+								<Border
+									AllowDrop="False"
+									BorderThickness="2,2,2,2"
+									Canvas.Top="73"
+									Height="241"
+									Width="399"
+									Canvas.Bottom="234"
+									Canvas.Left="-2">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+							</Canvas>
+							<GroupBox.Header>
+								<TextBlock
+									FontWeight="Bold"
+									Foreground="#FF6D6D6D"
+									TextAlignment="Center">
+									RECIPIENT/PAYEE INFORMATION
+								</TextBlock>
+							</GroupBox.Header>
+						</GroupBox>
+						<GroupBox
+							FontSize="13"
+							FontWeight="Normal"
+							VerticalAlignment="Top"
+							Height="500"
+							Canvas.Left="445"
+							Width="431">
+							<GroupBox.Header>
+								<TextBlock
+									FontWeight="Bold"
+									Foreground="#FF6D6D6D"
+									TextAlignment="Center">
+									PICKUP AND WIRE AVAILABILITY INFORMATION
+								</TextBlock>
+							</GroupBox.Header>
+							<Canvas
+								HorizontalAlignment="Left"
+								Width="419">
+								<Border
+									AllowDrop="False"
+									BorderThickness="2,2,2,2"
+									Canvas.Top="8"
+									Canvas.Left="0"
+									Height="262"
+									Canvas.Bottom="206"
+									Width="435">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+								<TextBox
+									TextWrapping="WrapWithOverflow"
+									Width="188"
+									Text="{Binding Path=pickupCityStateZip, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									x:Name="pickupCityStateZip"
+									Height="30"
+									Canvas.Left="141.00000000000023"
+									Canvas.Top="154.99999999999997"
+									TabIndex="28" />
+								<TextBlock
+									TextAlignment="Right"
+									Text="Pickup City, State, Zip:"
+									FontSize="13"
+									Width="107"
+									TextWrapping="WrapWithOverflow"
+									LineStackingStrategy="BlockLineHeight"
+									LineHeight="13"
+									Height="38"
+									Canvas.Right="318"
+									Canvas.Left="28"
+									Canvas.Top="157"></TextBlock>
+								<TextBox
+									TextWrapping="WrapWithOverflow"
+									Width="188"
+									Text="{Binding Path=pickupAddress, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									x:Name="pickupAddress"
+									Height="30"
+									RenderTransformOrigin="0.5104,0.7942"
+									Canvas.Top="111.00000000000003"
+									Canvas.Left="141.00000000000023"
+									TabIndex="27" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									Width="116"
+									FontSize="13"
+									Height="27"
+									Content="Pickup Address:"
+									Canvas.Left="23.999999999999993"
+									Canvas.Top="111.00000000000003"></Label>
+								<TextBox
+									TextWrapping="WrapWithOverflow"
+									Width="188"
+									Text="{Binding Path=pickupName, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									x:Name="pickupName"
+									Height="30"
+									Canvas.Left="141"
+									Canvas.Top="63.000000000000028"
+									TabIndex="26" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									Width="116"
+									FontSize="13"
+									Height="27"
+									Content="Pickup Name:"
+									Canvas.Left="24"
+									Canvas.Top="63"></Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									Content="Pickup Location Information"
+									FontWeight="Medium"
+									FontStyle="Italic"
+									Foreground="#FF494949"
+									Height="32"
+									FontSize="14.5"
+									Canvas.Top="14"
+									Canvas.Left="-2"
+									Width="208"></Label>
+								<TextBox
+									TextWrapping="WrapWithOverflow"
+									Width="188"
+									Text="{Binding Path=pickupPhone, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									x:Name="pickupPhone"
+									Height="30"
+									Canvas.Left="141"
+									Canvas.Top="202.99999999999997"
+									TabIndex="29" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									Width="116"
+									FontSize="13"
+									Height="27"
+									Content="Pickup Phone No:"
+									Canvas.Left="23.999999999999993"
+									Canvas.Top="203.00000000000003"></Label>
+								<TextBlock
+									TextAlignment="Right"
+									TextWrapping="WrapWithOverflow"
+									Height="32"
+									FontWeight="Medium"
+									Foreground="#FF494949"
+									FontStyle="Italic"
+									Text="Date and Availability of Wire"
+									Canvas.Left="5"
+									Canvas.Top="284"
+									FontSize="14.5"
+									Width="201"
+									Canvas.Right="213"></TextBlock>
+								<TextBlock
+									TextAlignment="Right"
+									Text="Transfer Date:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Height="23"
+									Foreground="#FF000000"
+									Width="110"
+									Canvas.Right="294"
+									Canvas.Top="331"
+									Canvas.Left="25"></TextBlock>
+								<TextBox
+									TextWrapping="WrapWithOverflow"
+									Width="188"
+									Text="{Binding Path=transferDate, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									x:Name="transferDate"
+									Height="30"
+									Canvas.Left="141"
+									Canvas.Top="324.00000000000011"
+									TabIndex="30"
+									LostFocus="FundsAvailableBy_LostFocus"
+									KeyDown="FundsAvailableBy_Enter" />
+								<TextBlock
+									TextAlignment="Right"
+									Text="Funds Available By:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Height="23"
+									Foreground="#FF000000"
+									Width="110"
+									Canvas.Right="302.99999999999989"
+									Canvas.Top="376"
+									Canvas.Left="24"></TextBlock>
+								<TextBox
+									TextWrapping="WrapWithOverflow"
+									Width="188"
+									Text="{Binding Path=fundsAvailableBy, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									x:Name="fundsAvailableBy"
+									Height="30"
+									Canvas.Left="141"
+									Canvas.Top="369"
+									TabIndex="31" />
+								<TextBlock
+									TextAlignment="Right"
+									Text="Country of Receipt:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Height="23"
+									Foreground="#FF000000"
+									Width="110"
+									Canvas.Right="302"
+									Canvas.Top="419.00000000000011"
+									Canvas.Left="24"></TextBlock>
+								<ComboBox
+									Name="countryOfReceiptDropdown"
+									Text="United States"
+									ItemsSource="{Binding countries}"
+									Width="189"
+									Height="27"
+									Canvas.Left="140.00000000000023"
+									Canvas.Top="415"
+									TabIndex="32" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="18"
+									Height="29"
+									FontSize="17"
+									Foreground="#FFFF0000"
+									RenderTransformOrigin="0.5073,2.1426"
+									Canvas.Left="-120.40000000000021"
+									Canvas.Top="28.1">
+									*
+								</Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="18"
+									Height="29"
+									FontSize="17"
+									Foreground="#FFFF0000"
+									RenderTransformOrigin="0.5073,2.1426"
+									Canvas.Left="-120.00000000000011"
+									Canvas.Top="92">
+									*
+								</Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="18"
+									Height="29"
+									FontSize="17"
+									Foreground="#FFFF0000"
+									RenderTransformOrigin="0.5073,2.1426"
+									Canvas.Left="-120.00000000000011"
+									Canvas.Top="129">
+									*
+								</Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="18"
+									Height="29"
+									FontSize="17"
+									Foreground="#FFFF0000"
+									RenderTransformOrigin="0.5073,2.1426"
+									Canvas.Top="325"
+									Canvas.Left="329">
+									*
+								</Label>
+							</Canvas>
+						</GroupBox>
+					</Canvas>
+				</TabItem>
+				<TabItem
+					Margin="-2,0,-2,-2"
+					Width="150"
+					Header="Financial Institutions"
+					FontSize="13"
+					HorizontalAlignment="Center">
+					<Canvas
+						Name="Financial_Institutions_Page"
+						Width="887"
+						Height="572">
+						<Button
+							FontSize="12"
+							Width="80"
+							Click="PreviousPage_Button"
+							Height="20"
+							Canvas.Left="8"
+							Canvas.Top="530"
+							Cursor="Hand">
+							Previous Page
+						</Button>
+						<Button
+							FontSize="12"
+							Width="70.400000000000034"
+							Click="NextPage_Button"
+							Height="20"
+							Canvas.Left="802"
+							Canvas.Top="530"
+							Cursor="Hand">
+							Next Page
+						</Button>
+						<Border
+							AllowDrop="False"
+							BorderThickness="2,2,2,2"
+							Height="40"
+							Canvas.Top="520"
+							Canvas.Bottom="12"
+							Canvas.Left="0"
+							Width="879">
+							<Border.BorderBrush>
+								<LinearGradientBrush
+									StartPoint="0,0.5"
+									EndPoint="1,0.5">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop
+											Color="#FFFFFFFF"
+											Offset="0.01483050847457627" />
+										<GradientStop
+											Color="#FFFFFFFF"
+											Offset="1" />
+										<GradientStop
+											Color="#FF777777"
+											Offset="0.49788135593220345" />
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Border.BorderBrush>
+						</Border>
+						<GroupBox
+							Name="Intermediary_Bank_Info_Page"
+							FontSize="13"
+							FontWeight="Normal"
+							Width="430"
+							Height="498"
+							VerticalAlignment="Top"
+							Canvas.Top="2"
+							Canvas.Left="11.000000000000057">
+							<GroupBox.Header>
+								<TextBlock
+									FontWeight="Bold"
+									TextAlignment="Center"
+									Foreground="#FF6D6D6D">
+						INTERMEDIARY FINANCIAL INSTITUTION INFORMATION
+					</TextBlock>
+							</GroupBox.Header>
+							<Canvas
+								VerticalAlignment="Top"
+								Width="418.8"
+								Height="477">
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="Name of Institution:"
+									FontSize="13"
+									Width="127"
+									Height="27"
+									Canvas.Left="2.0000000000000568"
+									Canvas.Top="136.90000000000003"></Label>
+								<TextBox
+									Name="ibName"
+									Width="189"
+									Height="27"
+									Canvas.Left="129"
+									Canvas.Top="136.90000000000003"
+									Text="{Binding Path=ibName, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="34" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="46.000000000000114"
+									Canvas.Top="172.90000000000003">
+						Address:
+					</Label>
+								<TextBox
+									Name="ibAddress"
+									Width="189"
+									Height="27"
+									Canvas.Left="129"
+									Canvas.Top="172.90000000000003"
+									Text="{Binding Path=ibAddress, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="35" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="91"
+									Height="27"
+									Canvas.Left="38"
+									Canvas.Top="207.90000000000003">
+						City:
+					</Label>
+								<TextBox
+									Name="ibCity"
+									Width="189"
+									Height="27"
+									Canvas.Left="129"
+									Canvas.Top="207.90000000000003"
+									Text="{Binding Path=ibCity, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="36" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="46.000000000000114"
+									Canvas.Top="242.90000000000003">
+						State:
+					</Label>
+								<ComboBox
+									ItemsSource="{Binding states}"
+									Name="ibStatesDropdown"
+									Width="56"
+									Height="27"
+									Canvas.Left="129"
+									Canvas.Top="242.90000000000003"
+									TabIndex="37" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="35"
+									Height="27"
+									Canvas.Left="185.00000000000011"
+									Canvas.Top="242.90000000000003">
+						Zip:
+					</Label>
+								<TextBox
+									Name="ibZip"
+									Width="98"
+									Height="27"
+									Canvas.Left="220.00000000000011"
+									Canvas.Top="242.90000000000003"
+									Text="{Binding Path=ibZip, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="38" />
+								<TextBox
+									Height="30"
+									Name="ibRoutingNum"
+									KeyDown="Bank_Routing_Num_On_Enter"
+									LostFocus="Bank_Routing_Num_On_LostFocus"
+									Width="189"
+									Canvas.Left="129"
+									Canvas.Top="45.1"
+									Text="{Binding Path=ibRoutingNum, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="33" />
+								<TextBlock
+									HorizontalAlignment="Left"
+									TextAlignment="Right"
+									Text="ABA Routing/ Transit No:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Width="106"
+									Height="35"
+									Canvas.Left="18"
+									Canvas.Right="290"
+									Canvas.Top="40"></TextBlock>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="Swift/Sort Code:"
+									FontSize="13"
+									Width="109"
+									Height="27"
+									Canvas.Left="20"
+									Canvas.Top="276.90000000000003"></Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="Branch Information:"
+									FontSize="13"
+									Width="130"
+									Height="27"
+									Canvas.Left="0"
+									Canvas.Top="310.9"></Label>
+								<TextBox
+									Name="ibSwiftSortCode"
+									Width="189"
+									Height="27"
+									Canvas.Left="129"
+									Canvas.Top="277.90000000000003"
+									Text="{Binding Path=ibSwiftSortCode, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="39" />
+								<TextBox
+									VerticalAlignment="Center"
+									Width="189"
+									Name="ibBranchInfo"
+									Height="27"
+									Canvas.Left="129"
+									Canvas.Top="312.9"
+									Text="{Binding Path=ibBranchInfo, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="40" />
+								<TextBlock
+									Canvas.Left="17.6"
+									HorizontalAlignment="Left"
+									TextAlignment="Right"
+									Text="Special Routing Instructions:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Width="106"
+									Height="35"
+									Canvas.Right="294.99999999999989"
+									Canvas.Top="358.9"></TextBlock>
+								<TextBox
+									VerticalAlignment="Center"
+									Width="189"
+									TextWrapping="Wrap"
+									Name="ibRoutingInstr"
+									Height="71"
+									Canvas.Left="129"
+									Canvas.Top="347.9"
+									Text="{Binding Path=ibRoutingInstr, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="41" />
+								<Border
+									AllowDrop="False"
+									BorderThickness="2,2,2,2"
+									Canvas.Top="15"
+									Height="90"
+									Canvas.Bottom="377"
+									Canvas.Left="0"
+									Width="418.8">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+								<!--<Expander
+									Canvas.Top="435.19999999999987"
+									Canvas.Left="19.000000000000114">
+									<Canvas
+										Height="500"
+										Width="500"></Canvas>
+								</Expander>-->
+							</Canvas>
+						</GroupBox>
+						<GroupBox
+							FontSize="13"
+							FontWeight="Normal"
+							VerticalAlignment="Top"
+							Canvas.Left="449"
+							Width="430"
+							Height="500">
+							<GroupBox.Header>
+								<TextBlock
+									FontWeight="Bold"
+									Foreground="#FF6D6D6D"
+									TextAlignment="Center">
+						RECIPIENT FINANCIAL INSTITUTION INFORMATION
+					</TextBlock>
+							</GroupBox.Header>
+							<Canvas
+								Name="Recipient_Bank_Info_Page"
+								VerticalAlignment="Top"
+								Height="476"
+								Width="415.8">
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="Name of Institution:"
+									FontSize="13"
+									Width="127"
+									Height="27"
+									Canvas.Left="2.0000000000001137"
+									Canvas.Top="130.99999999999997"></Label>
+								<TextBox
+									Name="rbName"
+									Width="189"
+									Height="27"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="137.00000000000003"
+									Text="{Binding Path=rbName, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="43" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="46.000000000000114"
+									Canvas.Top="173.00000000000003">
+						Address:
+					</Label>
+								<TextBox
+									Name="rbAddress"
+									Width="189"
+									Height="27"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="173.00000000000003"
+									Text="{Binding Path=rbAddress, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="44" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="91"
+									Height="27"
+									Canvas.Left="38.000000000000114"
+									Canvas.Top="208.00000000000003">
+						City:
+					</Label>
+								<TextBox
+									Name="rbCity"
+									Width="189"
+									Height="27"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="208.00000000000003"
+									Text="{Binding Path=rbCity, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="45" />
+								<Label
+									HorizontalContentAlignment="Right"
+									Grid.Column="0"
+									Grid.Row="0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									FontSize="13"
+									Width="83"
+									Height="27"
+									Canvas.Left="46.000000000000114"
+									Canvas.Top="242.99999999999997">
+						State:
+					</Label>
+								<ComboBox
+									ItemsSource="{Binding states}"
+									Name="rbStatesDropdown"
+									Width="56"
+									Height="27"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="242.99999999999997"
+									TabIndex="46" />
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Width="35"
+									Height="27"
+									Canvas.Left="185"
+									Canvas.Top="242.99999999999997">
+						Zip:
+					</Label>
+								<TextBox
+									Name="rbZip"
+									Width="98"
+									Height="27"
+									Canvas.Left="220"
+									Canvas.Top="242.99999999999997"
+									Text="{Binding Path=rbZip, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="47" />
+								<TextBox
+									Height="30"
+									Name="rbRoutingNum"
+									Width="189"
+									KeyDown="Bank_Routing_Num_On_Enter"
+									LostFocus="Bank_Routing_Num_On_LostFocus"
+									Canvas.Left="129"
+									Canvas.Top="45"
+									Text="{Binding Path=rbRoutingNum, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="42" />
+								<TextBlock
+									Canvas.Left="17.6"
+									HorizontalAlignment="Left"
+									TextAlignment="Right"
+									Text="ABA Routing/ Transit No:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Width="106"
+									Height="35"
+									Canvas.Right="335.89999999999986"
+									Canvas.Top="40"></TextBlock>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="Swift/Sort Code:"
+									FontSize="13"
+									Width="109"
+									Height="27"
+									Canvas.Left="20"
+									Canvas.Top="277"></Label>
+								<Label
+									HorizontalContentAlignment="Right"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Bottom"
+									Content="Branch Information:"
+									FontSize="13"
+									Width="130"
+									Height="27"
+									Canvas.Left="0"
+									Canvas.Top="311"></Label>
+								<TextBox
+									Name="rbSwiftSortCode"
+									Width="189"
+									Height="27"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="278"
+									Text="{Binding Path=rbSwiftSortCode, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="48" />
+								<TextBox
+									VerticalAlignment="Center"
+									Width="189"
+									Name="rbBranchInfo"
+									Height="27"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="313"
+									Text="{Binding Path=rbBranchInfo, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="49" />
+								<TextBlock
+									Canvas.Left="17.6"
+									HorizontalAlignment="Left"
+									TextAlignment="Right"
+									Text="Special Routing Instructions:"
+									TextWrapping="WrapWithOverflow"
+									FontSize="13"
+									Width="106"
+									Height="35"
+									Canvas.Right="288.99999999999989"
+									Canvas.Top="359.00000000000011"></TextBlock>
+								<TextBox
+									VerticalAlignment="Center"
+									Width="189"
+									TextWrapping="Wrap"
+									Name="rbRoutingInstr"
+									Height="71"
+									Canvas.Left="129.00000000000023"
+									Canvas.Top="348"
+									Text="{Binding Path=rbRoutingInstr, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+									TabIndex="50" />
+								<Border
+									AllowDrop="False"
+									BorderThickness="2,2,2,2"
+									Canvas.Top="15"
+									Height="91"
+									Canvas.Bottom="377"
+									Canvas.Left="0"
+									Width="412.8">
+									<Border.BorderBrush>
+										<LinearGradientBrush
+											StartPoint="0,0.5"
+											EndPoint="1,0.5">
+											<LinearGradientBrush.GradientStops>
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="0.01483050847457627" />
+												<GradientStop
+													Color="#FFFFFFFF"
+													Offset="1" />
+												<GradientStop
+													Color="#FF777777"
+													Offset="0.49788135593220345" />
+											</LinearGradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.BorderBrush>
+								</Border>
+							</Canvas>
+						</GroupBox>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							RenderTransformOrigin="0.5,0.5"
+							Canvas.Top="153.00000000000003"
+							Canvas.Left="778">
+							*
+							</Label>
+						<Label
+							HorizontalContentAlignment="Right"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Bottom"
+							Width="18"
+							Height="29"
+							FontSize="17"
+							Foreground="#FFFF0000"
+							Canvas.Left="778"
+							Canvas.Top="189">
+							*
+							</Label>
+					</Canvas>
+				</TabItem>
+				<TabItem
+					Width="150"
+					Header="Internal Use Info"
+					FontSize="13"
+					HorizontalAlignment="Center">
+					<GroupBox
+						FontSize="13"
+						FontWeight="Normal"
+						VerticalAlignment="Top"
+						Height="513"
+						Width="871">
+						<GroupBox.Header>
+							<TextBlock
+								FontWeight="Bold"
+								Foreground="#FF6D6D6D"
+								TextAlignment="Center"
+								Text="INTERNAL USE ONLY"></TextBlock>
+						</GroupBox.Header>
+						<Canvas
+							Name="Internal_Use_Additional_Info_Page"
+							VerticalAlignment="Stretch"
+							Height="557"
+							Width="861">
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Canvas.Top="8"
+								Height="280"
+								Width="422"
+								Canvas.Bottom="269"
+								Canvas.Left="0">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Canvas.Top="8"
+								Canvas.Bottom="292"
+								Height="257"
+								Width="396"
+								Canvas.Left="464">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Text="Member Confirming Funds Transfer Request:"
+								FontSize="13"
+								Height="36"
+								Width="147"
+								Canvas.Right="709"
+								Canvas.Top="19.000000000000028"
+								Canvas.Left="3"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Width="186"
+								Height="30"
+								x:Name="memberConfirmingFunds"
+								Text="{Binding Path=memberConfirmingFunds, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Top="23.710000000000036"
+								Canvas.Left="157.00000000000006"
+								TabIndex="51" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Width="122"
+								FontSize="13"
+								LineStackingStrategy="BlockLineHeight"
+								LineHeight="13"
+								Text="Identification Used:"
+								Canvas.Left="28"
+								Height="14"
+								Canvas.Top="78"></TextBlock>
+							<TextBox
+								Width="186"
+								x:Name="rIDused"
+								TabIndex="52"
+								Height="30"
+								Canvas.Left="157.00000000000011"
+								Canvas.Top="69.000000000000028"></TextBox>
+							<Label
+								HorizontalContentAlignment="Right"
+								Grid.Column="0"
+								Grid.Row="0"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Bottom"
+								FontSize="12"
+								Content="Method of Transfer:"
+								Width="122"
+								Height="26"
+								Canvas.Left="33.999999999999943"
+								Canvas.Top="111"></Label>
+							<ComboBox
+								Width="186"
+								x:Name="methodOfTransferDropdown"
+								TabIndex="53"
+								Canvas.Left="157.00000000000011"
+								Height="30"
+								Canvas.Top="111">
+								<ComboBoxItem>Alloya</ComboBoxItem>
+								<ComboBoxItem>Federal Reserve Bank</ComboBoxItem>
+							</ComboBox>
+							<Label
+								HorizontalContentAlignment="Right"
+								VerticalAlignment="Bottom"
+								Content="Processed By:"
+								HorizontalAlignment="Stretch"
+								Width="110"
+								Height="29"
+								FontSize="13"
+								Canvas.Top="156"
+								Canvas.Left="44"></Label>
+							<TextBox
+								VerticalAlignment="Center"
+								Width="186"
+								Height="30"
+								x:Name="employeeName"
+								Text="{Binding Path=employeeName, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								TabIndex="54"
+								Canvas.Left="157.00000000000011"
+								Canvas.Top="155.00000000000003" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Text="Special Instructions:"
+								Width="122"
+								Height="22"
+								FontSize="13"
+								Canvas.Left="27"
+								Canvas.Right="710.99999999999989"
+								Canvas.Top="219.00000000000003"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Width="186"
+								x:Name="internalSpecialInstr"
+								Text="{Binding Path=internalSpecialInstr, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Height="74"
+								TabIndex="55"
+								Canvas.Left="157.00000000000011"
+								Canvas.Top="196.99999999999997" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								Height="22"
+								TextAlignment="Center"
+								FontWeight="Medium"
+								FontStyle="Italic"
+								Foreground="#FF494949"
+								Canvas.Left="10"
+								Text="Security Measures"
+								Width="123"
+								Canvas.Top="303.28999999999996"
+								Canvas.Right="720"
+								FontSize="14.5"></TextBlock>
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextWrapping="WrapWithOverflow"
+								Text="Security Method Used:"
+								TextAlignment="Right"
+								FontSize="13"
+								Width="130"
+								Height="27"
+								Canvas.Right="720"
+								Canvas.Left="22"
+								Canvas.Top="351"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Height="30"
+								TextAlignment="Left"
+								Width="186"
+								x:Name="securityMethodUsed"
+								Text="{Binding Path=securityMethodUsed, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								RenderTransformOrigin="0.4899,-0.9196"
+								Canvas.Left="157.00000000000006"
+								Canvas.Top="346"
+								TabIndex="56" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextWrapping="WrapWithOverflow"
+								TextAlignment="Right"
+								FontSize="13"
+								Width="130"
+								Height="27"
+								Text="Security Processed By:"
+								Canvas.Right="717"
+								Canvas.Top="392"
+								Canvas.Left="21"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Height="30"
+								TextAlignment="Left"
+								Width="186"
+								x:Name="securityProcessedBy"
+								Text="{Binding Path=securityProcessedBy, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								RenderTransformOrigin="0.4899,-0.9196"
+								Canvas.Left="157.00000000000006"
+								Canvas.Top="388.71000000000026"
+								TabIndex="57" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextWrapping="WrapWithOverflow"
+								TextAlignment="Right"
+								FontSize="13"
+								Width="130"
+								Height="27"
+								Text="Date and Time:"
+								Canvas.Right="733"
+								Canvas.Top="433"
+								Canvas.Left="20"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Height="30"
+								TextAlignment="Left"
+								Width="186"
+								x:Name="securityDateTime"
+								Text="{Binding Path=securityDateTime, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								RenderTransformOrigin="0.4899,-0.9196"
+								Canvas.Left="157.00000000000006"
+								Canvas.Top="431.00000000000011"
+								TabIndex="58" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								Text="For Callbacks (If Applicable)"
+								Height="22"
+								TextAlignment="Center"
+								FontWeight="Medium"
+								FontStyle="Italic"
+								Foreground="#FF494949"
+								Canvas.Left="480"
+								Canvas.Top="24"
+								FontSize="14.5"
+								Width="189"
+								Canvas.Right="192"></TextBlock>
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextWrapping="WrapWithOverflow"
+								Text="Employee Performing Callback:"
+								TextAlignment="Right"
+								FontSize="13"
+								BaselineOffset="31"
+								LineStackingStrategy="BlockLineHeight"
+								LineHeight="13"
+								Width="135"
+								Height="30"
+								Canvas.Left="500"
+								Canvas.Right="226"
+								Canvas.Top="77.999999999999972"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								TextAlignment="Left"
+								Height="30"
+								Width="186"
+								x:Name="employeeCallback"
+								Text="{Binding Path=employeeCallback, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="78"
+								TabIndex="59" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextWrapping="WrapWithOverflow"
+								Text="Phone No. Used For Callback:"
+								TextAlignment="Right"
+								Width="116"
+								Height="32"
+								FontSize="13"
+								LineStackingStrategy="BlockLineHeight"
+								LineHeight="13"
+								Canvas.Left="519"
+								Canvas.Right="226"
+								Canvas.Top="129.00000000000003"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								TextAlignment="Left"
+								Height="30"
+								Width="186"
+								x:Name="phoneNumCallback"
+								Text="{Binding Path=phoneNumCallback, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="125"
+								TabIndex="60" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextWrapping="WrapWithOverflow"
+								Text="Source/Verification of Secure Phone No:"
+								TextAlignment="Right"
+								FontSize="13"
+								Width="134"
+								LineStackingStrategy="BlockLineHeight"
+								LineHeight="13"
+								Canvas.Left="501"
+								Height="33"
+								Canvas.Right="226"
+								Canvas.Top="169.00000000000003"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								TextAlignment="Left"
+								Height="30"
+								Width="186"
+								x:Name="sourcePhoneVerificationCallback"
+								Text="{Binding Path=sourcePhoneVerificationCallback, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="171.71000000000007"
+								TabIndex="61" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								Text="Cancellation Information"
+								Height="22"
+								TextAlignment="Center"
+								Width="177"
+								FontWeight="Medium"
+								FontStyle="Italic"
+								Foreground="#FF494949"
+								Canvas.Left="480"
+								Canvas.Right="204"
+								Canvas.Top="281"
+								FontSize="14.5"></TextBlock>
+							<TextBox
+								TextWrapping="Wrap"
+								TextAlignment="Left"
+								Height="30"
+								Width="186"
+								x:Name="cancelProcessedBy"
+								Text="{Binding Path=cancelProcessedBy, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="332.9"
+								TabIndex="62" />
+							<TextBlock
+								TextWrapping="WrapWithOverflow"
+								Text="Processed By:"
+								TextAlignment="Right"
+								Width="116"
+								Height="32"
+								FontSize="13"
+								Canvas.Left="519"
+								Canvas.Right="226"
+								Canvas.Top="335.9"></TextBlock>
+							<TextBox
+								TextWrapping="Wrap"
+								TextAlignment="Left"
+								Height="30"
+								Width="186"
+								x:Name="cancelDate"
+								Text="{Binding Path=cancelDate, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="376.9"
+								TabIndex="63" />
+							<TextBlock
+								TextWrapping="WrapWithOverflow"
+								Text="Cancel Date:"
+								TextAlignment="Right"
+								Height="32"
+								FontSize="13"
+								Width="119"
+								Canvas.Left="515"
+								Canvas.Right="227"
+								Canvas.Top="379.9"></TextBlock>
+							<TextBox
+								TextWrapping="Wrap"
+								TextAlignment="Left"
+								Height="30"
+								Width="186"
+								x:Name="memberCancellingRequest"
+								Text="{Binding Path=memberCancellingRequest, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="419.90000000000009"
+								TabIndex="64" />
+							<TextBlock
+								TextWrapping="WrapWithOverflow"
+								Text="Member Cancelling Request:"
+								TextAlignment="Right"
+								Width="116"
+								Height="32"
+								LineStackingStrategy="BlockLineHeight"
+								LineHeight="13"
+								FontSize="13"
+								Canvas.Left="519"
+								Canvas.Right="226"
+								Canvas.Top="420.9"></TextBlock>
+							<!--<TextBlock
+								HorizontalAlignment="Left"
+								Text="OFAC Information"
+								Height="22"
+								TextAlignment="Center"
+								FontSize="14"
+								FontWeight="Medium"
+								FontStyle="Italic"
+								Foreground="#FF494949"
+								Width="123"
+								Canvas.Top="367"
+								Canvas.Right="244"
+								Canvas.Left="480"></TextBlock>
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Text="OFAC Verification By:"
+								Width="122"
+								Height="23"
+								FontSize="13"
+								Canvas.Right="244"
+								Canvas.Top="406"
+								Canvas.Left="514"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Width="186"
+								Height="30"
+								x:Name="ofacVerificationBy"
+								Text="{Binding Path=ofacVerificationBy, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="400.71000000000026" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Text="Date:"
+								Height="23"
+								FontSize="13"
+								Canvas.Right="244"
+								Width="39"
+								Canvas.Left="595"
+								Canvas.Top="448"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Width="186"
+								Height="30"
+								x:Name="ofacDateTime"
+								Text="{Binding Path=ofacDateTime, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="640"
+								Canvas.Top="444.00000000000011" />-->
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Height="39"
+								Width="868"
+								Canvas.Top="502"
+								Canvas.Bottom="13"
+								Canvas.Left="-3">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<Button
+								FontSize="12"
+								Width="80"
+								Height="20"
+								Click="PreviousPage_Button"
+								Canvas.Left="-3"
+								Canvas.Top="512"
+								Cursor="Hand">
+									Previous Page
+								</Button>
+							<Button
+								FontSize="12"
+								Click="NextPage_Button"
+								Height="20"
+								Cursor="Hand"
+								Width="70"
+								Canvas.Top="512.00000000000011"
+								Canvas.Left="790">
+							Next Page
+						</Button>
+							<Label
+								HorizontalContentAlignment="Right"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Bottom"
+								FontSize="13"
+								Height="27"
+								Content="Future transfer date(s)"
+								Width="142"
+								Canvas.Left="478.00000000000028"
+								Canvas.Top="430"
+								Visibility="Collapsed"></Label>
+							<CheckBox
+								Name="futureDateBox"
+								Width="16"
+								Height="16"
+								Checked="FutureDate_Checked"
+								Unchecked="FutureDate_Unchecked"
+								RenderTransformOrigin="0.5,1.4806"
+								Canvas.Left="464.00000000000006"
+								Canvas.Top="437"
+								Visibility="Collapsed" />
+							<Label
+								HorizontalContentAlignment="Right"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Bottom"
+								FontSize="13"
+								Height="27"
+								Content="1."
+								Width="24"
+								RenderTransformOrigin="0.9909,0.355"
+								Canvas.Left="475.99999999999994"
+								Canvas.Top="456.00000000000011"
+								Visibility="Collapsed"></Label>
+							<TextBox
+								Name="futureDate1"
+								TextWrapping="WrapWithOverflow"
+								Height="25"
+								Width="130"
+								IsEnabled="False"
+								IsHitTestVisible="True"
+								BorderBrush="#FFABADB3"
+								Canvas.Left="499.99999999999989"
+								Canvas.Top="458"
+								Text="{Binding Path=futureDate1, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+								Visibility="Collapsed" />
+							<Label
+								HorizontalContentAlignment="Right"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Bottom"
+								FontSize="13"
+								Height="27"
+								Content="2."
+								Width="25"
+								Canvas.Left="642.00000000000011"
+								Canvas.Top="456"
+								Visibility="Collapsed"></Label>
+							<TextBox
+								Name="futureDate2"
+								TextWrapping="WrapWithOverflow"
+								Height="25"
+								Width="130"
+								IsEnabled="False"
+								IsHitTestVisible="True"
+								Canvas.Left="666.99999999999989"
+								Canvas.Top="458"
+								Text="{Binding Path=futureDate2, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Visibility="Collapsed" />
+						</Canvas>
+					</GroupBox>
+				</TabItem>
+				<TabItem
+					HorizontalAlignment="Left"
+					Margin="-2,0,-2,-2"
+					Width="150"
+					FontSize="13"
+					Header="Additional Info">
+					<GroupBox
+						FontSize="13"
+						FontWeight="Normal"
+						VerticalAlignment="Top"
+						Height="513"
+						Width="871">
+						<GroupBox.Header>
+							<TextBlock
+								FontWeight="Bold"
+								Foreground="#FF6D6D6D"
+								TextAlignment="Center"
+								Text="ADDITIONAL INFO"></TextBlock>
+						</GroupBox.Header>
+						<Canvas
+							Name="Additional_Info_Page"
+							VerticalAlignment="Stretch"
+							Width="866"
+							Height="557">
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Canvas.Top="8"
+								Width="402"
+								Canvas.Left="15"
+								Height="336"
+								Canvas.Bottom="213">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Canvas.Left="469"
+								Canvas.Bottom="228"
+								Width="388"
+								Height="129"
+								Canvas.Top="10">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Canvas.Top="263"
+								Width="404"
+								Height="127"
+								Canvas.Left="453.00000000000006"
+								Canvas.Bottom="166">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<TextBlock
+								HorizontalAlignment="Left"
+								Height="22"
+								TextAlignment="Center"
+								FontWeight="Medium"
+								FontStyle="Italic"
+								Canvas.Left="5"
+								Canvas.Top="22"
+								Text="OFAC Information and Verification"
+								FontSize="14.5"
+								Width="234"
+								Canvas.Right="594.10000000000014"
+								Foreground="#FF494949"></TextBlock>
+							<TextBlock
+								TextWrapping="WrapWithOverflow"
+								FontSize="13"
+								Width="340"
+								Canvas.Top="54"
+								HorizontalAlignment="Stretch"
+								TextAlignment="Left"
+								Foreground="#FF494949"
+								Height="39"
+								Canvas.Right="491.10000000000008"
+								Canvas.Left="28"
+								Text="Please choose a name from the dropdown to run the OFAC verification, or type in a name manually."></TextBlock>
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Width="122"
+								FontSize="13"
+								Canvas.Left="10"
+								Canvas.Right="734"
+								Text="OFAC Verification Completed By:"
+								LineStackingStrategy="BlockLineHeight"
+								LineHeight="14"
+								Height="36"
+								Canvas.Top="234"></TextBlock>
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Text="Name:"
+								Height="23"
+								FontSize="13"
+								Width="39"
+								RenderTransformOrigin="0.5136,0.3943"
+								Canvas.Top="114.00000000000003"
+								Canvas.Right="726"
+								Canvas.Left="95"></TextBlock>
+							<ComboBox
+								ItemsSource="{Binding ofacNames}"
+								Name="ofacNamesDropdown"
+								IsEditable="True"
+								Width="186"
+								Canvas.Top="106.99999999999997"
+								Canvas.Left="139.99999999999994"
+								Height="30"
+								TabIndex="65"></ComboBox>
+							<Button
+								Height="30"
+								Width="186"
+								Canvas.Left="139.99999999999994"
+								Canvas.Top="153.90000000000003"
+								TabIndex="66">
+								Run OFAC Verification
+							</Button>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Width="186"
+								Height="30"
+								x:Name="ofacVerificationBy"
+								Text="{Binding Path=ofacVerificationBy, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="139.99999999999994"
+								Canvas.Top="234"
+								TabIndex="67" />
+							<TextBlock
+								HorizontalAlignment="Left"
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Text="Date:"
+								Height="23"
+								FontSize="13"
+								Width="39"
+								RenderTransformOrigin="0.5136,0.3943"
+								Canvas.Left="90"
+								Canvas.Right="734"
+								Canvas.Top="285.00000000000011"></TextBlock>
+							<TextBox
+								VerticalAlignment="Center"
+								TextWrapping="Wrap"
+								Width="186"
+								Height="30"
+								x:Name="ofacDateTime"
+								Text="{Binding Path=ofacDateTime, Source={StaticResource data}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+								Canvas.Left="139.99999999999994"
+								Canvas.Top="278"
+								TabIndex="68" />
+							<TextBlock
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Height="32"
+								FontWeight="Medium"
+								Foreground="#FF494949"
+								FontStyle="Italic"
+								Text="Type of Wire"
+								FontSize="14.5"
+								Width="96"
+								Canvas.Top="22"
+								Canvas.Right="298"
+								Canvas.Left="474"></TextBlock>
+							<RadioButton
+								GroupName="remitNonremitOptions"
+								Name="remittanceOpt"
+								Height="16"
+								Width="16"
+								Canvas.Left="503.00000000000006"
+								Canvas.Top="82.000000000000028"
+								TabIndex="70">
+								Remittance
+							</RadioButton>
+							<TextBlock
+								TextAlignment="Right"
+								Text="Remittance"
+								TextWrapping="WrapWithOverflow"
+								FontSize="13"
+								Width="71"
+								Height="23"
+								Foreground="#FF000000"
+								Canvas.Right="267.09999999999991"
+								Canvas.Left="514"
+								Canvas.Top="79"></TextBlock>
+							<RadioButton
+								GroupName="remitNonremitOptions"
+								Name="nonremittanceOpt"
+								FontSize="14"
+								Height="16"
+								Width="16"
+								IsChecked="True"
+								Canvas.Left="641"
+								Canvas.Top="84.000000000000028"
+								TabIndex="71" />
+							<TextBlock
+								TextAlignment="Right"
+								Text="Nonremittance"
+								TextWrapping="WrapWithOverflow"
+								FontSize="13"
+								Foreground="#FF000000"
+								Width="93"
+								RenderTransformOrigin="0.4796,-0.3826"
+								Height="21"
+								Canvas.Top="81.000000000000028"
+								Canvas.Right="116"
+								Canvas.Left="653"></TextBlock>
+							<TextBlock
+								TextAlignment="Right"
+								TextWrapping="WrapWithOverflow"
+								Height="32"
+								FontWeight="Medium"
+								Foreground="#FF494949"
+								FontStyle="Italic"
+								Text="Branch Submitting Wire Transfer"
+								Width="215"
+								Canvas.Left="10"
+								Canvas.Right="636"
+								Canvas.Top="369.1"
+								FontSize="14.5"></TextBlock>
+							<ComboBox
+								Height="26"
+								x:Name="wireBranchDropdown"
+								Width="186"
+								Canvas.Left="139.99999999999994"
+								Canvas.Top="415"
+								TabIndex="69">
+								<ComboBoxItem
+									IsSelected="True">Branch 1 -- Chicago</ComboBoxItem>
+								<ComboBoxItem>Branch 2 -- Northwest</ComboBoxItem>
+								<ComboBoxItem>Branch 3 -- Newark</ComboBoxItem>
+								<ComboBoxItem>Branch 4 -- Palatine</ComboBoxItem>
+								<ComboBoxItem>Branch 6 -- Bloomingdale</ComboBoxItem>
+								<ComboBoxItem>Branch 9 -- Jersey City</ComboBoxItem>
+								<ComboBoxItem>Branch 10 -- Whippany</ComboBoxItem>
+								<ComboBoxItem>Branch 12 -- Warren</ComboBoxItem>
+								<ComboBoxItem>Branch 13 -- West Bloomfield</ComboBoxItem>
+								<ComboBoxItem>Branch 14 -- Hamtramck</ComboBoxItem>
+							</ComboBox>
+							<Label
+								HorizontalContentAlignment="Right"
+								Grid.Column="0"
+								Grid.Row="0"
+								Foreground="#FF494949"
+								FontStyle="Italic"
+								FontWeight="Medium"
+								Height="27"
+								FontSize="14.5"
+								Canvas.Top="147"
+								Width="139"
+								HorizontalAlignment="Left"
+								Canvas.Left="479">
+								Additional Options
+							</Label>
+							<Label
+								HorizontalContentAlignment="Right"
+								Grid.Column="0"
+								Grid.Row="0"
+								FontSize="13"
+								Width="183"
+								Height="27"
+								Canvas.Left="657"
+								Canvas.Top="203.00000000000003">
+								Subject to Transfer Agreement
+							</Label>
+							<CheckBox
+								Width="16"
+								Height="16"
+								Checked="TransAgreement_Checked"
+								Unchecked="TransAgreement_Unchecked"
+								x:Name="subjectToTransAgreement"
+								RenderTransformOrigin="2.5834,0.3836"
+								Canvas.Top="210.00000000000003"
+								Canvas.Left="641"
+								TabIndex="73" />
+							<Label
+								HorizontalContentAlignment="Right"
+								Grid.Column="0"
+								Grid.Row="0"
+								FontSize="13"
+								Width="70"
+								Height="27"
+								Canvas.Top="203"
+								Canvas.Left="513">
+								One Time
+							</Label>
+							<CheckBox
+								Width="16"
+								Height="16"
+								Checked="OneTime_Checked"
+								Unchecked="OneTime_Unchecked"
+								x:Name="oneTime"
+								RenderTransformOrigin="1.6399,0.6197"
+								Canvas.Top="210.00000000000003"
+								Canvas.Left="503.00000000000006"
+								TabIndex="72" />
+							<TextBlock
+								TextAlignment="Right"
+								Text="Please select the status of this wire transfer."
+								TextWrapping="WrapWithOverflow"
+								Height="32"
+								FontWeight="Medium"
+								Foreground="#FF494949"
+								FontStyle="Italic"
+								Canvas.Left="475"
+								FontSize="14.5"
+								Canvas.Right="98"
+								Width="293"
+								Canvas.Top="276"></TextBlock>
+							<RadioButton
+								GroupName="correctIncorrectOptions"
+								Name="Incorrect"
+								FontSize="14"
+								Height="16"
+								Width="16"
+								Checked="Incorrect_Checked"
+								RenderTransformOrigin="0.5408,0.2679"
+								Canvas.Top="333.00000000000011"
+								Canvas.Left="641"
+								TabIndex="75" />
+							<TextBlock
+								TextAlignment="Right"
+								Text="Incorrect (wire contains an error)"
+								FontSize="13"
+								Height="23"
+								Width="191"
+								Canvas.Top="331.00000000000006"
+								Canvas.Right="31.100000000000023"
+								Canvas.Left="657"></TextBlock>
+							<RadioButton
+								GroupName="correctIncorrectOptions"
+								Name="Correct"
+								FontSize="14"
+								Height="16"
+								Width="16"
+								RenderTransformOrigin="1.0192,0.5642"
+								Checked="Correct_Checked"
+								Canvas.Top="333.00000000000011"
+								Canvas.Left="503.00000000000006"
+								TabIndex="74" />
+							<TextBlock
+								TextAlignment="Right"
+								Text="Correct"
+								FontSize="13"
+								Width="50"
+								Height="23"
+								Canvas.Right="302.1"
+								Canvas.Top="331"
+								Canvas.Left="514"></TextBlock>
+							<TextBlock
+								TextWrapping="WrapWithOverflow"
+								FontSize="14"
+								FontWeight="Medium"
+								TextAlignment="Left"
+								Foreground="#FFCC1818"
+								FontStyle="Normal"
+								Canvas.Left="480"
+								Text="* Please make sure you have entered all the required fields and that you checked for errors before submitting this wire."
+								Canvas.Right="1"
+								Width="385"
+								Height="45"
+								Canvas.Top="421"></TextBlock>
+							<Border
+								AllowDrop="False"
+								BorderThickness="2,2,2,2"
+								Height="39"
+								Canvas.Bottom="13"
+								Canvas.Left="-3"
+								Width="868"
+								Canvas.Top="502">
+								<Border.BorderBrush>
+									<LinearGradientBrush
+										StartPoint="0,0.5"
+										EndPoint="1,0.5">
+										<LinearGradientBrush.GradientStops>
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="0.01483050847457627" />
+											<GradientStop
+												Color="#FFFFFFFF"
+												Offset="1" />
+											<GradientStop
+												Color="#FF777777"
+												Offset="0.49788135593220345" />
+										</LinearGradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+							</Border>
+							<Button
+								FontSize="12"
+								Width="80"
+								Height="20"
+								Click="PreviousPage_Button"
+								Canvas.Left="-3"
+								Canvas.Top="512"
+								Cursor="Hand">
+									Previous Page
+								</Button>
+							<Button
+								Visibility="Hidden"
+								FontSize="12"
+								Content="Update"
+								Click="Update_Wire"
+								Height="20"
+								Width="70"
+								x:Name="updateBtn"
+								Cursor="Hand"
+								Canvas.Top="512"
+								Canvas.Left="687"></Button>
+							<Button
+								FontSize="12"
+								Content="Add New Wire"
+								Click="Add_Wire_To_Database"
+								Height="20"
+								x:Name="finishBtn"
+								Canvas.Top="512"
+								Cursor="Hand"
+								Width="89"
+								Canvas.Left="768"></Button>
+						</Canvas>
+					</GroupBox>
+				</TabItem>
+			</TabControl>
+		</Grid>
+	</Viewbox>
+</Window>

@@ -1,0 +1,32 @@
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\wire_transfer.csprojResolveAssemblyReference.cache
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\CurrExWindow.baml
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Window1.baml
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\CurrExWindow.g.cs
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Window1.g.cs
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\App.g.cs
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\wire_transfer_MarkupCompile.cache
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\wire_transfer.g.resources
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\wire_transfer.exe.config
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\wire_transfer.exe
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\wire_transfer.pdb
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\System.Data.SQLite.dll
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\wire_transfer.exe
+C:\Users\iryna\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\wire_transfer.pdb
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\wire_transfer.csprojResolveAssemblyReference.cache
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\CurrExWindow.baml
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\CurrExWindow.g.cs
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\App.g.cs
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Window1.baml
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Window1.g.cs
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\FinishPage.baml
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\FinishPage.g.cs
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\itextsharp.dll
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\Wire Transfer.exe.config
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\Wire Transfer.exe
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\bin\Debug\Wire Transfer.pdb
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Wire Transfer_MarkupCompile.cache
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Wire Transfer_MarkupCompile.lref
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Wire Transfer.g.resources
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Wire Transfer.exe
+C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Debug\Wire Transfer.pdb
