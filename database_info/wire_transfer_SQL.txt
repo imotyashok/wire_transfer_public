@@ -1,0 +1,213 @@
+CREATE TABLE person(
+  id INT IDENTITY PRIMARY KEY,
+  id_type VARCHAR(255),
+  name VARCHAR(255),
+  address VARCHAR(255),
+  city VARCHAR(255),
+  state VARCHAR(255),
+  zip VARCHAR(255)
+);
+
+CREATE TABLE sender(
+  id INT NOT NULL,
+  person_type VARCHAR(255),
+  phone_num VARCHAR(255),
+  member_num VARCHAR(255),
+  sub_account VARCHAR(255),
+  PRIMARY KEY (id, person_type)
+--  FOREIGN KEY (id) REFERENCES person(id) --
+  
+);
+
+CREATE TABLE recipient (
+  id INTEGER NOT NULL,
+  person_type VARCHAR(255),
+  country VARCHAR(255),
+  phone_num VARCHAR(255),
+  account_num_IBAN VARCHAR(255),
+  SSN VARCHAR(255),
+  TIN VARCHAR(255),
+  DLnum VARCHAR(255),
+  
+  PRIMARY KEY (id, person_type)
+--  FOREIGN KEY (id) REFERENCES person(id) --
+);
+
+CREATE TABLE bank (
+  id INTEGER IDENTITY PRIMARY KEY,
+  name VARCHAR(255),
+  address VARCHAR(255),
+  city VARCHAR(255),
+  state VARCHAR(255),
+  zip VARCHAR(255),
+  ABA_routing_num VARCHAR(255),
+  swift_sort_code VARCHAR(255),
+  branch VARCHAR(255),
+  routing_instructions VARCHAR(255),
+  bank_type VARCHAR(255),
+
+);
+
+CREATE TABLE wire (
+  id INTEGER IDENTITY PRIMARY KEY,
+  transfer_date VARCHAR(255),
+  transfer_time VARCHAR(255),
+  wire_type VARCHAR(255),
+  status VARCHAR(255),
+  country_of_receipt VARCHAR(255),
+  wire_branch VARCHAR(255),
+  currency_info VARCHAR(255),
+  transfer_amount_USD REAL, 
+  transfer_fees_USD REAL,
+  total_USD REAL,
+  currency_type VARCHAR(255),
+  exchange_rate REAL,
+  transfer_amount_foreign REAL,
+  total_foreign REAL,
+  payment_instructions VARCHAR(255),
+  funds_available_by VARCHAR(255),
+  sender_id INTEGER, 
+  recipient_id INTEGER,
+  bank_id INTEGER,
+  pickup_name VARCHAR(255), 
+  pickup_address VARCHAR(255),
+  pickup_city_state_zip VARCHAR(255), 
+  pickup_phone VARCHAR(255),
+  future_date_box INTEGER,
+  future_date_1 VARCHAR(255),
+  future_date_2 VARCHAR(255),
+  one_time INTEGER, 
+  subject_to_transfer_agreement INTEGER,
+  processed_by VARCHAR(255),
+  method_of_transfer VARCHAR(255),
+  internal_use_id INTEGER,
+
+  computer_name VARCHAR(255),
+  IP_address VARCHAR(255),
+  employee_user VARCHAR(255)
+	
+ -- FOREIGN KEY(sender_id) REFERENCES sender(id), --
+ -- FOREIGN KEY (recipient_id) REFERENCES recipient(id), --
+ -- FOREIGN KEY(bank_id) REFERENCES bank(id), --
+ -- FOREIGN KEY (internal_use_id) REFERENCES internal_use_info(id) --
+  
+);
+
+
+CREATE TABLE wire_history (
+  id INTEGER IDENTITY PRIMARY KEY,
+  wire_id INTEGER,
+  s_name VARCHAR(255),
+  s_address VARCHAR(255),
+  s_city VARCHAR(255),
+  s_state VARCHAR(255),
+  s_zip VARCHAR(255),
+  s_phone_num VARCHAR(255),
+  s_member_num VARCHAR(255),
+  s_sub_account VARCHAR(255),
+  r_name VARCHAR(255),
+  r_address VARCHAR(255),
+  r_city VARCHAR(255),
+  r_state VARCHAR(255),
+  r_zip VARCHAR(255),
+  r_country VARCHAR(255),
+  r_phone VARCHAR(255),
+  r_account_num_IBAN VARCHAR(255),
+  r_SSN VARCHAR(255),
+  r_TIN VARCHAR(255),
+  r_DLnum VARCHAR(255),
+  ib_name VARCHAR(255),
+  ib_address VARCHAR(255),
+  ib_city VARCHAR(255),
+  ib_state VARCHAR(255),
+  ib_zip VARCHAR(255),
+  ib_ABA_routing_num VARCHAR(255),
+  ib_swift_sort_code VARCHAR(255),
+  ib_branch VARCHAR(255),
+  ib_routing_instructions VARCHAR(255),
+  rb_name VARCHAR(255),
+  rb_address VARCHAR(255),
+  rb_city VARCHAR(255),
+  rb_state VARCHAR(255),
+  rb_zip VARCHAR(255),
+  rb_ABA_routing_num VARCHAR(255),
+  rb_swift_sort_code VARCHAR(255),
+  rb_branch VARCHAR(255),
+  rb_routing_instructions VARCHAR(255),
+  datetime VARCHAR(255),
+  transfer_date VARCHAR(255),
+  transfer_time VARCHAR(255),
+  funds_available_by VARCHAR(255),
+  wire_type VARCHAR(255),
+  currency_info VARCHAR(255),
+  transfer_amount_USD VARCHAR(255),
+  transfer_fees_USD VARCHAR(255),
+  total_USD VARCHAR(255),
+  currency_type VARCHAR(255),
+  exchange_rate VARCHAR(255),
+  trans_amount_foreign VARCHAR(255),
+  total_foreign VARCHAR(255),
+  status INTEGER,
+  country_of_receipt VARCHAR(255),
+  wire_branch VARCHAR(255),
+  payment_instructions VARCHAR(255),
+  pickup_name VARCHAR(255),
+  pickup_address VARCHAR(255),
+  pickup_city_state_zip VARCHAR(255),
+  pickup_phone VARCHAR(255),
+  future_date_box INTEGER,
+  future_date_1 VARCHAR(255),
+  future_date_2 VARCHAR(255),
+  one_time INTEGER, 
+  subject_to_transfer_agreement INTEGER,
+  member_confirming_funds VARCHAR(255),
+  id_used VARCHAR(255),  
+  method_of_transfer VARCHAR(255),
+  transaction_control_num VARCHAR(255),
+  wire_processed_by VARCHAR(255), 
+  OFAC_verification_by VARCHAR(255),
+  OFAC_date_time VARCHAR(255),
+  internal_special_instructions VARCHAR(255), 
+  security_method_used VARCHAR(255),
+  security_processed_by VARCHAR(255),
+  security_date_time VARCHAR(255),
+  employee_callback VARCHAR(255), 
+  phone_num_for_callback VARCHAR(255),
+  source_phone_verification VARCHAR(255),
+  member_cancelling_request VARCHAR(255),
+  cancel_date VARCHAR(255),
+  cancel_processed_by VARCHAR(255), 
+
+  computer_name VARCHAR(255),
+  IP_address VARCHAR(255),
+  employee_user VARCHAR(255)
+  
+ -- FOREIGN KEY (wire_id) REFERENCES wire(id) --
+	
+);
+
+CREATE TABLE internal_use_info (
+  id INTEGER IDENTITY PRIMARY KEY,
+  member_confirming_funds VARCHAR(255),
+  date_and_time VARCHAR(255),
+  fee_amount REAL,
+  id_used VARCHAR(255),  
+  method_of_transfer VARCHAR(255),
+  transaction_control_num VARCHAR(255),
+  wire_processed_by VARCHAR(255), 
+  OFAC_verification_by VARCHAR(255),
+  OFAC_date_time VARCHAR(255),
+  internal_special_instructions VARCHAR(255), 
+  security_method_used VARCHAR(255),
+  security_processed_by VARCHAR(255),
+  security_date_time VARCHAR(255),
+  employee_callback VARCHAR(255), 
+  phone_num_for_callback VARCHAR(255),
+  source_phone_verification VARCHAR(255),
+  member_cancelling_request VARCHAR(255),
+  cancel_date VARCHAR(255),
+  cancel_processed_by VARCHAR(255)
+
+--  FOREIGN KEY (id) REFERENCES wire(id) --
+
+);
