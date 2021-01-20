@@ -12,3 +12,16 @@ C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Release\Wire Transf
 C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Release\Wire Transfer_MarkupCompile.lref
 C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Release\Wire Transfer.g.resources
 C:\Users\IrynaM\Desktop\work\Wire_Transfer\wire_transfer\obj\Release\Wire Transfer.exe
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\wire_transfer.csprojResolveAssemblyReference.cache
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\FinishPage.baml
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\FinishPage.g.cs
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\Window1.g.cs
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\App.g.cs
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\Wire Transfer_MarkupCompile.cache
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\Wire Transfer_MarkupCompile.lref
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\Wire Transfer.exe
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\bin\Release\Wire Transfer.exe.config
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\bin\Release\Wire Transfer.exe
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\Window1.baml
+C:\Users\iryna\Desktop\projects\wire_transfer_public\wire_transfer\obj\Release\Wire Transfer.g.resources

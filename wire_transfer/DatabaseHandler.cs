@@ -33,10 +33,11 @@ namespace wire_transfer
 				connection.Open();
 				cmd = connection.CreateCommand();
 				connectionSuccessful = true;
-			} catch (SqlException) {
+			} catch (SqlException e) {
 				connectionSuccessful = false;
 				MessageBox.Show("Sorry, the program cannot be run since a connection to the database couldn't be established. " +
-				                "\n\nPlease contact your IT department or try running the program at a later time.");
+				                "\n\nPlease contact your IT department or try running the program at a later time." +"\n");
+				
 			}
 		}
 		

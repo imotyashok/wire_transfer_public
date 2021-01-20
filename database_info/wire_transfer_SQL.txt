@@ -1,5 +1,5 @@
 CREATE TABLE person(
-  id INT IDENTITY PRIMARY KEY,
+  id INT PRIMARY KEY,
   id_type VARCHAR(255),
   name VARCHAR(255),
   address VARCHAR(255),
@@ -30,11 +30,10 @@ CREATE TABLE recipient (
   DLnum VARCHAR(255),
   
   PRIMARY KEY (id, person_type)
---  FOREIGN KEY (id) REFERENCES person(id) --
 );
 
 CREATE TABLE bank (
-  id INTEGER IDENTITY PRIMARY KEY,
+  id INT PRIMARY KEY,
   name VARCHAR(255),
   address VARCHAR(255),
   city VARCHAR(255),
@@ -44,12 +43,12 @@ CREATE TABLE bank (
   swift_sort_code VARCHAR(255),
   branch VARCHAR(255),
   routing_instructions VARCHAR(255),
-  bank_type VARCHAR(255),
+  bank_type VARCHAR(255)
 
 );
 
 CREATE TABLE wire (
-  id INTEGER IDENTITY PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   transfer_date VARCHAR(255),
   transfer_time VARCHAR(255),
   wire_type VARCHAR(255),
@@ -95,35 +94,35 @@ CREATE TABLE wire (
 
 
 CREATE TABLE wire_history (
-  id INTEGER IDENTITY PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   wire_id INTEGER,
-  s_name VARCHAR(255),
-  s_address VARCHAR(255),
-  s_city VARCHAR(255),
-  s_state VARCHAR(255),
-  s_zip VARCHAR(255),
-  s_phone_num VARCHAR(255),
-  s_member_num VARCHAR(255),
-  s_sub_account VARCHAR(255),
-  r_name VARCHAR(255),
-  r_address VARCHAR(255),
-  r_city VARCHAR(255),
-  r_state VARCHAR(255),
-  r_zip VARCHAR(255),
-  r_country VARCHAR(255),
+  s_name VARCHAR(100),
+  s_address VARCHAR(100),
+  s_city VARCHAR(100),
+  s_state VARCHAR(100),
+  s_zip VARCHAR(100),
+  s_phone_num VARCHAR(15),
+  s_member_num VARCHAR(50),
+  s_sub_account VARCHAR(20),
+  r_name VARCHAR(100),
+  r_address VARCHAR(100),
+  r_city VARCHAR(100),
+  r_state VARCHAR(100),
+  r_zip VARCHAR(20),
+  r_country VARCHAR(100),
   r_phone VARCHAR(255),
-  r_account_num_IBAN VARCHAR(255),
-  r_SSN VARCHAR(255),
-  r_TIN VARCHAR(255),
-  r_DLnum VARCHAR(255),
-  ib_name VARCHAR(255),
-  ib_address VARCHAR(255),
-  ib_city VARCHAR(255),
-  ib_state VARCHAR(255),
-  ib_zip VARCHAR(255),
-  ib_ABA_routing_num VARCHAR(255),
-  ib_swift_sort_code VARCHAR(255),
-  ib_branch VARCHAR(255),
+  r_account_num_IBAN VARCHAR(100),
+  r_SSN VARCHAR(50),
+  r_TIN VARCHAR(50),
+  r_DLnum VARCHAR(50),
+  ib_name VARCHAR(100),
+  ib_address VARCHAR(100),
+  ib_city VARCHAR(100),
+  ib_state VARCHAR(100),
+  ib_zip VARCHAR(50),
+  ib_ABA_routing_num VARCHAR(50),
+  ib_swift_sort_code VARCHAR(50),
+  ib_branch VARCHAR(100),
   ib_routing_instructions VARCHAR(255),
   rb_name VARCHAR(255),
   rb_address VARCHAR(255),
@@ -187,7 +186,7 @@ CREATE TABLE wire_history (
 );
 
 CREATE TABLE internal_use_info (
-  id INTEGER IDENTITY PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   member_confirming_funds VARCHAR(255),
   date_and_time VARCHAR(255),
   fee_amount REAL,

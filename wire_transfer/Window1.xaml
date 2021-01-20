@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Window
 	x:Class="wire_transfer.Window1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	Title="Wire Transfer"
@@ -192,13 +192,13 @@
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center"
 					TextAlignment="Center"
-					Text="Selfreliance FCU Wire Transfer Manager"
 					Height="35"
 					FontWeight="SemiBold"
 					FontSize="24"
 					Width="449"
 					Canvas.Top="215.2"
-					Canvas.Left="222.00000000000006" />
+					Canvas.Left="222.00000000000006"
+					Text="Some Bank Wire Transfer Manager" />
 				<TextBlock
 					Text="Please select what you'd like to do."
 					Height="26"
